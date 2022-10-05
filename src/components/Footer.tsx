@@ -4,6 +4,6 @@ type Props = {}
 
 export default function Footer({}: Props) {
   return (
-    <div>Footer</div>
+    <div>Hello ong tui start len dc r :)))</div>
   )
 }
