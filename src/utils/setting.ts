@@ -48,7 +48,7 @@ export const {setCookie,getCookie,getStore,getStoreJson,setStore,setStoreJson,AC
 
 /*Cau hinh request cho tat ca api- response cho tat ca kq tra ve tu api*/
 /* Cau hinh domain gui di */
-const DOMAIN = 'https://shop.cyberlearn.vn/api'
+const DOMAIN = 'https://elearningnew.cybersoft.edu.vn/api'
 const TOKEN_CYBERSOFT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMCIsIkhldEhhblN0cmluZyI6IjE3LzAyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTY3NjU5MjAwMDAwMCIsIm5iZiI6MTY0ODIyNzYwMCwiZXhwIjoxNjc2NzM5NjAwfQ.aK-3RvHXQyu6H2-FFiafeSKR4UMCcRmnuDbTT-XIcUU'
 export const http = axios.create({
     baseURL:DOMAIN,

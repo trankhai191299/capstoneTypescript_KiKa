@@ -13,3 +13,5 @@ const subjectReducer = createSlice({
 export const {} = subjectReducer.actions
 
 export default subjectReducer.reducer
+
+//------------------action api
