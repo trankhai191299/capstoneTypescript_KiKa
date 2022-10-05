@@ -14,6 +14,8 @@ import 'antd/dist/antd.css';
 //history
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import TestKhai from './Test/KhaiTest/Test';
+import TestKien from './Test/KienTest/Test';
 export const history = createBrowserHistory({ window });
 //
 const root = ReactDOM.createRoot(
@@ -26,6 +28,8 @@ root.render(
       <Route path='' element={<HomeTemplate/>}>
         <Route index element={<Home/>}></Route>
         <Route path="*" element={<Navigate to="" />}></Route>
+        <Route path='testkhai' element={<TestKhai/>}></Route>
+        <Route path='testkien' element={<TestKien/>}></Route>
         {/* <Route path='login' element={<Login/>}></Route>
         <Route path='register' element={<Register/>}></Route>
         <Route path='detail'>
