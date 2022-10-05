@@ -1,11 +1,11 @@
 # Capstone React Typescript Cuối Khóa
 
-Lớp: BC30 \
+Lớp: BC30 
 ## Họ tên
 Trần Hoàng Khải \
-Lê Trung Kiên \
+Lê Trung Kiên 
 
 ## Link
 --Git: \
 --Youtube: \
---Deploy: \
+--Deploy: 
