@@ -7,3 +7,4 @@
 7. Redux Toolkit + React redux -- đã cài
 8. Antd -- đã cài
 9. History -- đã cài
+10. Yup + Formik -- đã cài
