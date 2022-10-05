@@ -1,7 +1,7 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 import { AppDispatch } from '../configStore';
 import {http} from '../../utils/setting'
-export interface SubjectModel {
+export interface CourseModel {
     maKhoaHoc:      string;
     biDanh:         string;
     tenKhoaHoc:     string;
@@ -27,31 +27,32 @@ export interface NguoiTao {
     tenLoaiNguoiDung: string;
 }
 const initialState:any = {
-    arrSubject: []
+    arrCourse: [],
+    courseDetail:{},
 }
 
-const subjectReducer = createSlice({
+const courseReducer = createSlice({
   name: "subjectReducer",
   initialState,
   reducers: {
-    getAllSubjectAction:(state,action:PayloadAction<SubjectModel[]>)=>{
-        state.arrSubject = action.payload
+    getAllCourseAction:(state,action:PayloadAction<CourseModel[]>)=>{
+        state.arrCourse = action.payload
     }
   }
 });
 
-export const {getAllSubjectAction} = subjectReducer.actions
+export const {getAllCourseAction} = courseReducer.actions
 
-export default subjectReducer.reducer
+export default courseReducer.reducer
 
 //------------------action api
-export const getAllSubjectApi = () =>{
+export const getAllCourseApi = () =>{
     return async (dispatch:AppDispatch)=>{
         try {
             let result = await http.get('/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01')
-            let arrSubject:SubjectModel[] = result.data
-            console.log(result);
-            const action = getAllSubjectAction(arrSubject)
+            let arrSubject:CourseModel[] = result.data
+            
+            const action = getAllCourseAction(arrSubject)
             dispatch(action)
         } catch (error) {
             console.log(error);

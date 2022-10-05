@@ -1,10 +1,10 @@
 import { configureStore,PayloadAction } from '@reduxjs/toolkit'
-import subjectReducer from './reducers/subjectReducer'
+import courseReducer from './reducers/courseReducer'
 import userReducer from './reducers/userReducer'
 export const store = configureStore({
   reducer: {
     userReducer:userReducer,
-    subjectReducer:subjectReducer
+    courseReducer:courseReducer
   }
 })
 export type RootState = ReturnType<typeof store.getState>
