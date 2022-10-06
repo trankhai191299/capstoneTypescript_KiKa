@@ -13,6 +13,7 @@ import { store } from './redux/configStore'
 import "../node_modules/slick-carousel/slick/slick.css"; 
 import "../node_modules/slick-carousel/slick/slick-theme.css";
 import 'antd/dist/antd.css';
+import '../src/assets/css/style.css'
 //history
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
