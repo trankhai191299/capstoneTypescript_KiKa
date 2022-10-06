@@ -44,7 +44,7 @@ export default function TestKhai({}: Props) {
         setSearchParam({keyword:khoahoc.current})
     }
     const renderAllOrSearch = ()=> {
-        if(searchCourses.length !== 0){
+        if(searchCourses.length !== 0 && khoahoc.current !== ''){
             return renderCourse(searchCourses)
         }else{
             return renderCourse(arrCourse)
