@@ -57,7 +57,7 @@ export default function Test1({}: Props) {
     }
   return (
     <div className='container'>
-      <h1 className="display-4">Danh sach khoa hoc</h1>
+      <h3 className="display-4">Danh sach khoa hoc</h3>
 
       <form className="frm" onSubmit={handleSubmit}>
         <div className="row">

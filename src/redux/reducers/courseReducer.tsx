@@ -30,6 +30,7 @@ const initialState:any = {
     arrCourse: [],
     courseDetail:{},
     searchCourses: [],
+    courseCategory: [],
 }
 
 const courseReducer = createSlice({
@@ -42,10 +43,13 @@ const courseReducer = createSlice({
     getSearchCourseAction:(state,action:PayloadAction<CourseModel[]>)=>{
         state.searchCourses = action.payload
     },
+    getCourseCategoryAction:(state,action:PayloadAction<DanhMucKhoaHoc[]>)=>{
+        state.courseCategory = action.payload
+    }
   }
 });
 
-export const {getAllCourseAction,getSearchCourseAction} = courseReducer.actions
+export const {getAllCourseAction,getSearchCourseAction,getCourseCategoryAction} = courseReducer.actions
 
 export default courseReducer.reducer
 
@@ -71,6 +75,21 @@ export const getCourseByName = (khoahoc:any) =>{
             let searchArr:CourseModel[] = result.data
 
             const action = getSearchCourseAction(searchArr)
+            dispatch(action)
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+}
+
+export const getCourseCategory = () =>{
+    return async (dispatch:AppDispatch)=>{
+        try {
+            let result = await http.get('/QuanLyKhoaHoc/LayDanhMucKhoaHoc')
+            let arrCate:DanhMucKhoaHoc[] = result.data
+            // console.log(result);
+            const action = getCourseCategoryAction(arrCate)
             dispatch(action)
         } catch (error) {
             console.log(error);

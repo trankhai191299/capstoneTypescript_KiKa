@@ -10,6 +10,7 @@ export default function LinkTest({}: Props) {
         <hr />
         <div className="d-flex flex-column align-item-center justify-content-between">
             <NavLink to={'/testkhai/test1'} className='my-2' style={{fontSize:'15px'}}>---Test 1---</NavLink>
+            <NavLink to={'/testkhai/test2'} className='my-2' style={{fontSize:'15px'}}>---Test 2---</NavLink>
         </div>
     </div>
     

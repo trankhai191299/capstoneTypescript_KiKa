@@ -21,6 +21,7 @@ import TestKhai from './Test/KhaiTest/Test';
 import TestKien from './Test/KienTest/Test';
 import Test1 from './Test/KhaiTest/Test1';
 import LinkTest from './Test/KhaiTest/LinkTest';
+import Test2 from './Test/KhaiTest/Test2';
 export const history = createBrowserHistory({ window });
 //
 const root = ReactDOM.createRoot(
@@ -36,6 +37,7 @@ root.render(
         <Route path='testkhai' element={<TestKhai/>}>
           <Route index element={<LinkTest/>}></Route>
           <Route path='test1' element={<Test1/>}></Route>
+          <Route path='test2' element={<Test2/>}></Route>
         </Route>
         <Route path='testkien' element={<TestKien/>}></Route>
         {/* <Route path='login' element={<Login/>}></Route>
