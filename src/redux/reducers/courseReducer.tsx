@@ -29,6 +29,7 @@ export interface NguoiTao {
 const initialState:any = {
     arrCourse: [],
     courseDetail:{},
+    searchCourses: [],
 }
 
 const courseReducer = createSlice({
@@ -37,11 +38,15 @@ const courseReducer = createSlice({
   reducers: {
     getAllCourseAction:(state,action:PayloadAction<CourseModel[]>)=>{
         state.arrCourse = action.payload
-    }
+    },
+    getSearchCourseAction:(state,action:PayloadAction<CourseModel[]>)=>{
+        state.searchCourses = action.payload
+    },
+
   }
 });
 
-export const {getAllCourseAction} = courseReducer.actions
+export const {getAllCourseAction,getSearchCourseAction} = courseReducer.actions
 
 export default courseReducer.reducer
 
@@ -56,6 +61,21 @@ export const getAllCourseApi = () =>{
             dispatch(action)
         } catch (error) {
             console.log(error);
+        }
+    }
+}
+
+export const getCourseByName = (khoahoc:any) =>{
+    return async (dispatch:AppDispatch)=>{
+        try {
+            let result = await http.get(`/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${khoahoc}&MaNhom=GP01`)
+            let searchArr:CourseModel[] = result.data
+
+            const action = getSearchCourseAction(searchArr)
+            dispatch(action)
+        } catch (error) {
+            console.log(error);
+            
         }
     }
 }
