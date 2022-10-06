@@ -42,7 +42,6 @@ const courseReducer = createSlice({
     getSearchCourseAction:(state,action:PayloadAction<CourseModel[]>)=>{
         state.searchCourses = action.payload
     },
-
   }
 });
 

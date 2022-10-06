@@ -10,12 +10,17 @@ import Home from './pages/Home/Home';
 //store redux
 import { store } from './redux/configStore'
 //css+scss
+import "../node_modules/slick-carousel/slick/slick.css"; 
+import "../node_modules/slick-carousel/slick/slick-theme.css";
 import 'antd/dist/antd.css';
 //history
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
+//test page import
 import TestKhai from './Test/KhaiTest/Test';
 import TestKien from './Test/KienTest/Test';
+import Test1 from './Test/KhaiTest/Test1';
+import LinkTest from './Test/KhaiTest/LinkTest';
 export const history = createBrowserHistory({ window });
 //
 const root = ReactDOM.createRoot(
@@ -28,7 +33,10 @@ root.render(
       <Route path='' element={<HomeTemplate/>}>
         <Route index element={<Home/>}></Route>
         <Route path="*" element={<Navigate to="" />}></Route>
-        <Route path='testkhai' element={<TestKhai/>}></Route>
+        <Route path='testkhai' element={<TestKhai/>}>
+          <Route index element={<LinkTest/>}></Route>
+          <Route path='test1' element={<Test1/>}></Route>
+        </Route>
         <Route path='testkien' element={<TestKien/>}></Route>
         {/* <Route path='login' element={<Login/>}></Route>
         <Route path='register' element={<Register/>}></Route>

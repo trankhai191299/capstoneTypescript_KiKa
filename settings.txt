@@ -8,3 +8,4 @@
 8. Antd -- đã cài
 9. History -- đã cài
 10. Yup + Formik -- đã cài
+11. React-slick + slick carousel -- đã cài
