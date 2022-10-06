@@ -14,16 +14,16 @@ export default function Header({}: Props) {
             <NavLink to={"/"}>home</NavLink>
           </li>
           <li>
-            <a href="about.html">about</a>
+            <a href="#">login</a>
           </li>
           <li>
-            <a href="hairstyle.html">course</a>
+            <a href="#">register</a>
           </li>
           <li>
-            <a href="news.html">news</a>
+            <a href="#">category</a>
           </li>
           <li>
-            <a href="contact.html">contact</a>
+            <a href="#">profile</a>
           </li>
         </ul>
       </div>
