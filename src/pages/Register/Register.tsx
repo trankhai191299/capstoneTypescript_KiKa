@@ -55,32 +55,32 @@ export default function Register({}: Props) {
               <form onSubmit={frm.handleSubmit}>
                 <div className="form-group">
                   <p>Tài khoản</p>
-                  <input type="text" name="taiKhoan" id="taiKhoan" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+                  <input type="text" name="taiKhoan" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                 {frm.errors.taiKhoan?<span className='text-danger fw-bold'>{frm.errors.taiKhoan}</span>:''}
                 </div>
                 <div className="form-group">
                   <p>Mật khẩu</p>
-                  <input type="password" name="matKhau" id="matKhau" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+                  <input type="password" name="matKhau" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                 {frm.errors.matKhau?<span className='text-danger fw-bold'>{frm.errors.matKhau}</span>:''}
                 </div>
                 <div className="form-group">
                   <p>Nhập lại mật khẩu</p>
-                  <input type="password" name="confirmMatKhau" id="confirmMatKhau" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+                  <input type="password" name="confirmMatKhau" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                 {frm.errors.confirmMatKhau?<span className='text-danger fw-bold'>{frm.errors.confirmMatKhau}</span>:''}
                 </div>
                 <div className="form-group">
                   <p>Họ Tên</p>
-                  <input type="text" name='hoTen' id='hoTen' className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+                  <input type="text" name='hoTen' className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                 {frm.errors.hoTen?<span className='text-danger fw-bold'>{frm.errors.hoTen}</span>:''}
                 </div>
                 <div className="form-group">
                   <p>Email</p>
-                  <input type="email" name="email" id="email" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+                  <input type="email" name="email" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                 {frm.errors.email?<span className='text-danger fw-bold'>{frm.errors.email}</span>:''}
                 </div>
                 <div className="form-group">
                   <p>Số điện thoại</p>
-                  <input type="text" name="soDT" id="soDT" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+                  <input type="text" name="soDT" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                   {frm.errors.soDT?<span className='text-danger fw-bold'>{frm.errors.soDT}</span>:''}
                 </div>
                 <div className="row mt-3">

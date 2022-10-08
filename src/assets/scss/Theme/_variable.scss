@@ -1,5 +1,6 @@
 //--thiếu gì thì thêm zô nha--//
 //font size
+$text-xsm : 12px;
 $text-sm : 14px;
 $text-sm-1 : 16px;
 $text-sm-2 : 18px;
@@ -19,9 +20,13 @@ $text-cl-light : #fff;
 //background-color
 $bg-cl-dark:#000;
 $bg-cl-light : #fff;
+$bg-cl-ft:#1E1E2A;
 //border-color
 $bd-cl-dark:#000;
 $bd-cl-light:#fff;
+//btn-color
+$btn-cl-prim:#d4b03c;
+$btn-cl-hprim:#b09338;
 //-----------------mixin
 @mixin text($fs:$text-base,$fw:$text-regular,$c:$text-cl-dark){
     font-size: $fs;
