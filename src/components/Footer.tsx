@@ -6,7 +6,11 @@ export default function Footer({}: Props) {
   return (
     <div className='footer'>
       <div className="container">
-        Footer
+        <div className="row">
+          <div className="col-4"></div>
+          <div className="col-4"></div>
+          <div className="col-4"></div>
+        </div>
       </div>
     </div>
   );
