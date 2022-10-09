@@ -7,7 +7,7 @@ import {
   getAllCourseApi,
 } from "../../redux/reducers/courseReducer";
 import { randomCourse } from "../../utils/setting";
-// import abc from '../../assets/images/hairstyle17.jpg'
+import Carousel from "../../components/Carousel";
 type Props = {};
 
 export default function Home({}: Props) {
@@ -20,10 +20,10 @@ export default function Home({}: Props) {
     dispatch(action);
   }, []);
   const renderCourse = () => {
-    let newArrCourse = randomCourse(arrCourse,8)
+    let newArrCourse = randomCourse(arrCourse, 8);
     return newArrCourse.map((crs: CourseModel, index: number) => {
       return (
-        <div className="col-lg-3 col-12 mt-2"  key={index}>
+        <div className="col-lg-3 col-12 mt-2" key={index}>
           <div className="card shadow p-3 mb-4 bg-body rounded border-white">
             <img height="200" src={crs.hinhAnh} alt={crs.tenKhoaHoc} />
             <div className="card-body">
@@ -31,7 +31,10 @@ export default function Home({}: Props) {
                 <div>
                   <p className="fw-semibold">{crs.tenKhoaHoc}</p>
                 </div>
-                <NavLink className="btn btn-dark" to={`/detail/${crs.maKhoaHoc}`}>
+                <NavLink
+                  className="btn btn-dark"
+                  to={`/detail/${crs.maKhoaHoc}`}
+                >
                   Dang Ky
                 </NavLink>
               </div>
@@ -42,40 +45,11 @@ export default function Home({}: Props) {
     });
   };
   return (
-<<<<<<< HEAD
-    <div>
-      {/* cho nay de carousel */}
-      <div className="container">
-      <div className="row">{renderCourse()}</div>
-=======
     <div className="home">
-      <div className="carousel">
-        <div className="overlay">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-8"></div>
-              <div className="col-4 content">
-                <div className="title">
-                  <h1>Khởi đầu sự nghiệp của bạn</h1>
-                </div>
-                <div className="description">
-                  <p>Trở thành lập trình chuyên nghiệp tại CyberSoft</p>
-                </div>
-                <div className="button-area">
-                  <div className="row">
-                    <div className="col-6">
-                      <button className="btn btn-success">Xem khóa học</button>
-                    </div>
-                    <div className="col-6">
-                      <button className="btn btn-primary">Tư vấn học</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
->>>>>>> 8e1680d38930c525dc2b63ad7e1fe89103a7124e
+      <Carousel />
+      <div className="container mt-5">
+        <h2>Các khóa học mới nhất</h2>
+        <div className="row mt-5">{renderCourse()}</div>
       </div>
     </div>
   );
