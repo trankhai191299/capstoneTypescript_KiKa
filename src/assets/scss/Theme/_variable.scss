@@ -8,6 +8,7 @@ $text-base : 20px;
 $text-md : 24px;
 $text-l : 32px;
 $text-xl : 40px;
+$text-xxl : 64px;
 //font-weight
 $text-light : 300;
 $text-regular : 400;
@@ -17,6 +18,7 @@ $text-bold : 700;
 //text-color
 $text-cl-dark : #000;
 $text-cl-light : #fff;
+$text-cl-sp1:#d4b03c;
 //background-color
 $bg-cl-dark:#000;
 $bg-cl-light : #fff;
@@ -27,6 +29,8 @@ $bd-cl-light:#fff;
 //btn-color
 $btn-cl-prim:#d4b03c;
 $btn-cl-hprim:#b09338;
+$btn-cl-dark:#000;
+$btn-cl-light:#fff;
 //-----------------mixin
 @mixin text($fs:$text-base,$fw:$text-regular,$c:$text-cl-dark){
     font-size: $fs;

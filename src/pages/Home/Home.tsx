@@ -42,10 +42,40 @@ export default function Home({}: Props) {
     });
   };
   return (
+<<<<<<< HEAD
     <div>
       {/* cho nay de carousel */}
       <div className="container">
       <div className="row">{renderCourse()}</div>
+=======
+    <div className="home">
+      <div className="carousel">
+        <div className="overlay">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-8"></div>
+              <div className="col-4 content">
+                <div className="title">
+                  <h1>Khởi đầu sự nghiệp của bạn</h1>
+                </div>
+                <div className="description">
+                  <p>Trở thành lập trình chuyên nghiệp tại CyberSoft</p>
+                </div>
+                <div className="button-area">
+                  <div className="row">
+                    <div className="col-6">
+                      <button className="btn btn-success">Xem khóa học</button>
+                    </div>
+                    <div className="col-6">
+                      <button className="btn btn-primary">Tư vấn học</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+>>>>>>> 8e1680d38930c525dc2b63ad7e1fe89103a7124e
       </div>
     </div>
   );
