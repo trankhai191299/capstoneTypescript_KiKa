@@ -22,7 +22,7 @@ export default function Search({}: Props) {
               <div className="col-10">
                 <h4 className="title">{item.tenKhoaHoc}</h4>
                 <p className="description">
-                  {item.moTa.length>250?item.moTa.substring(0,250):item.moTa} ...
+                  {item.moTa.length>250?item.moTa.substring(0,250)+"...":item.moTa}
                 </p>
               </div>
             </div>
