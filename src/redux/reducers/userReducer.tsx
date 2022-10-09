@@ -13,8 +13,8 @@ import {
 import { history } from "../../index";
 
 export interface UserModel{
-  account: string,
-  password: string
+  taiKhoan: string,
+  matKhau: string,
 }
 export interface RegisterModel{
   taiKhoan: string,
@@ -47,10 +47,9 @@ export const loginApi = (userLogin:UserModel) => {
   return async (dispatch:AppDispatch) => {
     try {
       const result = await http.post("/QuanLyNguoiDung/DangNhap", userLogin);
-
       setCookie(ACCESS_TOKEN, result.data.accessToken, 30);
       setStore(ACCESS_TOKEN, result.data.accessToken);
-      console.log(result)
+      alert("dcm")
       history.push("/home");
       //const action = getProfileApi();
       //dispatch(action);

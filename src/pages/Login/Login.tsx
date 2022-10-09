@@ -1,5 +1,5 @@
-import { useFormik } from "formik";
 import React from "react";
+import { FormikProps, useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/configStore";
 import { loginApi, UserModel } from "../../redux/reducers/userReducer";
@@ -7,16 +7,21 @@ import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 type Props = {};
 
+interface FormValues {
+  taiKhoan: string;
+  matKhau: string;
+}
+
 export default function Login({}: Props) {
   const dispatch: AppDispatch = useDispatch();
-  const frm = useFormik({
+  const frm: FormikProps<FormValues> = useFormik<FormValues>({
     initialValues: {
-      account: "",
-      password: "",
+      taiKhoan: "",
+      matKhau: "",
     },
     validationSchema: Yup.object().shape({
-      account: Yup.string().required("Tai khoan không được bỏ trống"),
-      password: Yup.string()
+      taiKhoan: Yup.string().required("Tai khoan không được bỏ trống"),
+      matKhau: Yup.string()
         .required("Mật khẩu không được bỏ trống")
         .min(6, "Password có độ dài từ 6 đến 32 ký tự")
         .max(32, "Password có độ dài từ 6 đến 32 ký tự"),
@@ -32,16 +37,16 @@ export default function Login({}: Props) {
           <h2 className=" mb-5 fw-semibold text-center">-Please Sign In-</h2>
           <div className="form-floating">
             <input
-              type="account"
+              type="taiKhoan"
               className="form-control"
-              id="account"
+              id="taiKhoan"
               onChange={frm.handleChange}
               onBlur={frm.handleBlur}
             />
-            <label htmlFor="floatingInput">Account</label>
-            {frm.errors.account ? (
+            <label htmlFor="floatingtaiKhoan">Tai Khoan</label>
+            {frm.errors.taiKhoan ? (
               <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
-                {frm.errors.account}
+                {frm.errors.taiKhoan}
               </span>
             ) : (
               ""
@@ -49,16 +54,16 @@ export default function Login({}: Props) {
           </div>
           <div className="form-floating">
             <input
-              type="password"
+              type="matKhau"
               className="form-control"
-              id="password"
+              id="matKhau"
               onChange={frm.handleChange}
               onBlur={frm.handleBlur}
             />
-            <label htmlFor="floatingPassword">Password</label>
-            {frm.errors.password ? (
+            <label htmlFor="floatingmatKhau">Mat Khau</label>
+            {frm.errors.matKhau ? (
               <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
-                {frm.errors.password}
+                {frm.errors.matKhau}
               </span>
             ) : (
               ""
@@ -69,7 +74,7 @@ export default function Login({}: Props) {
               <input type="checkbox" defaultValue="remember-me" /> Remember me
             </label>
           </div>
-          <button className="w-100 btn btn-lg btn-dark mt-3 mb-3">
+          <button className="w-100 btn btn-lg btn-dark mt-3 mb-3" type="submit">
             Sign in
           </button>
           <p className="mt-5 mb-5 text-muted text-center">
