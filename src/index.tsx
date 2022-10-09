@@ -37,7 +37,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HistoryRouter history={history}>
     <Routes>
       <Route path='' element={<HomeTemplate/>}>
         <Route index element={<Home/>}></Route>
@@ -63,7 +63,7 @@ root.render(
         <Route path='coursemanagement'element={<CourseManagement/>}></Route>
       </Route>
     </Routes>
-  </BrowserRouter>
+  </HistoryRouter>
   </Provider>
 );
 
