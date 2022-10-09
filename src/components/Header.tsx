@@ -1,11 +1,14 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DanhMucKhoaHoc,
+  getCourseByName,
   getCourseCategory,
 } from "../redux/reducers/courseReducer";
 import { AppDispatch, RootState } from "../redux/configStore";
+import Search from "../pages/Search/Search";
+import { history } from "..";
 type Props = {};
 
 
@@ -13,12 +16,25 @@ export default function Header({}: Props) {
   const arrCategory = useSelector(
     (rootState: RootState) => rootState?.courseReducer?.courseCategory
   );
+  const {searchCourses} = useSelector((state:RootState)=>state.courseReducer)
   const dispatch: AppDispatch = useDispatch();
+  const searchKhoaHoc = useRef('')
+  let [searchParam,setSearchParam] = useSearchParams()
+  const timeoutRef = useRef({})
   React.useEffect(() => {
     //call api = action thunk
     const actionApi = getCourseCategory();
     dispatch(actionApi);
   }, []);
+  useEffect(()=>{
+    let keyword:string|null = searchParam.get('keyword')
+    if(searchKhoaHoc.current!==''){
+      dispatch(getCourseByName(keyword))
+    }
+  },[searchKhoaHoc.current])
+  useEffect(()=>{
+    renderSearchOrHome()
+  },[searchCourses])
   const renderCategory = () => {
    return arrCategory.map((cate: DanhMucKhoaHoc,index: number) => {
      return(
@@ -28,6 +44,23 @@ export default function Header({}: Props) {
      )
    })
   };
+  const handleChange = (e:any) =>{
+    searchKhoaHoc.current = e.target.value
+    timeoutRef.current = setTimeout(()=>{
+      setSearchParam({keyword:searchKhoaHoc.current})
+    },1000)
+  }
+  const renderSearchOrHome = () =>{
+    if(searchCourses.length !== 0 || searchKhoaHoc.current !== ''){
+      return <>
+        <Search searchCourses={searchCourses}/>
+        {history.push('/search')}
+      </>
+    }else{
+      history.push('/home')
+    }
+  }
+  
   return (
     <header className="py-3 border-bottom">
       <div
@@ -89,6 +122,9 @@ export default function Header({}: Props) {
               className="form-control"
               placeholder="Search..."
               aria-label="Search"
+              name='searchKhoaHoc'
+              id="searchKhoaHoc"
+              onChange={handleChange}
             />
           </form>
           <div className="flex-shrink-0 dropdown">

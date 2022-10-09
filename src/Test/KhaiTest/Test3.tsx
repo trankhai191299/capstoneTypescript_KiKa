@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
+import { Navigate, useSearchParams } from 'react-router-dom'
+import { history } from '../..'
 import { AppDispatch, RootState } from '../../redux/configStore'
 import SearchResult from './TestComponent/SearchResult'
 type Props = {}
@@ -17,6 +18,12 @@ export default function Test3({}: Props) {
       setSearchParam({search:searchInp.current})
     },1000)
   }
+  useEffect(()=>{
+    let keyword:string|null = searchParam.get('keyword')
+    if(searchInp.current!==''){
+      
+    }
+  })
   return (
     <div>
       <form>

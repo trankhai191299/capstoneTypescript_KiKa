@@ -1,8 +1,12 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+    title?:string
+}
 
-export default function SearchResult({}: Props) {
+export default function SearchResult({title}: Props) {
+    
+    
   return (
     <div>SearchResult</div>
   )

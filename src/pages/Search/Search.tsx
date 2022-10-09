@@ -3,9 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 type Props = {
   // searchInput:string,
+  searchCourses? : [],
 }
 
-export default function Search({}: Props) {
+export default function Search({searchCourses}: Props) {
+  console.log(searchCourses);
+  
   return (
     <div className='search'>
       <div className="container">
