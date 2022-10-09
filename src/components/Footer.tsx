@@ -1,6 +1,6 @@
 import React from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faS,faB,faLocationDot,faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+// import { faS,faB,faLocationDot,faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 type Props = {}
 
 export default function Footer({}: Props) {
@@ -69,7 +69,10 @@ export default function Footer({}: Props) {
             </div>
           </div>
           <div className="col-sm-4 mt-4 gr-3">
-            <p>Video gì đó ở đây</p>
+            <div>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Flophocviet%2F&tabs=timeline&width=250&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width={250} height={300} style={{border: 'none', overflow: 'hidden'}} scrolling="no" frameBorder={0} allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" />
+
+            </div>
             <div className="connect-link mt-5">
               <a href="#">Anh ngữ giao tiếp</a> - <a href="#">Khởi động Anh ngữ giao tiếp</a> - <a href="#">Lấy đà Anh ngữ giao tiếp</a> - <a href="#">Bật nhảy Anh ngữ giao tiếp</a> - <a href="#">Bay trên không Anh ngữ giao tiếp</a> - <a href="#">Tiếp đất</a>
             </div>
