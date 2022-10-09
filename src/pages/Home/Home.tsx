@@ -35,7 +35,7 @@ export default function Home({}: Props) {
                   className="btn btn-dark"
                   to={`/detail/${crs.maKhoaHoc}`}
                 >
-                  Dang Ky
+                  Đăng Ký
                 </NavLink>
               </div>
             </div>
