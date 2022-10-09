@@ -1,3 +1,4 @@
+import { typeOptions } from "@testing-library/user-event/dist/type/typeImplementation";
 import axios from "axios";
 // import { history } from "../index";
 export const config = {
@@ -84,6 +85,20 @@ http.interceptors.response.use((response)=>{
         return Promise.reject(err)
     }
 })
+
+export const randomCourse = (arr:Array<[]>, quantity: number) => {
+    let newArr : any = [];
+    for (let i = 0; i < arr.length; i++) {
+      let k = Math.floor(Math.random() * arr.length);
+      if (!newArr.includes(arr[k]) && newArr.length < quantity) {
+        newArr.push(arr[k]);
+      }
+      if (newArr.length === quantity) {
+        break;
+      }
+    }
+    return newArr;
+  };
 /*
     status code:
     400: tham so gui len ko hop le => kq ko tim dc (bad request)

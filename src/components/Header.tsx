@@ -8,10 +8,6 @@ import {
 import { AppDispatch, RootState } from "../redux/configStore";
 type Props = {};
 
-interface categoryDetail {
-  maDanhMuc: string;
-  tenDanhMuc: string;
-}
 
 export default function Header({}: Props) {
   const arrCategory = useSelector(
@@ -24,10 +20,10 @@ export default function Header({}: Props) {
     dispatch(actionApi);
   }, []);
   const renderCategory = () => {
-   return arrCategory.map((crs: DanhMucKhoaHoc,index: number) => {
+   return arrCategory.map((cate: DanhMucKhoaHoc,index: number) => {
      return(
       <li key={index}>
-        <a href="#" className="dropdown-item">{crs.tenDanhMuc}</a>
+        <a href="#" className="dropdown-item">{cate.tenDanhMuc}</a>
       </li>
      )
    })
