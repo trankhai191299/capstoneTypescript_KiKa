@@ -52,11 +52,8 @@ export default function Header({}: Props) {
   }
   const renderSearchOrHome = () =>{
     if(searchCourses.length !== 0 || searchKhoaHoc.current !== ''){
-      return <>
-        <Search searchCourses={searchCourses}/>
-        {history.push('/search')}
-      </>
-    }else{
+      history.push('/search',searchCourses)
+    }else if(searchKhoaHoc.current === ''){
       history.push('/home')
     }
   }

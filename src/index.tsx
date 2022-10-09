@@ -29,8 +29,6 @@ import Test2 from './Test/KhaiTest/Test2';
 import AdminTemplate from './template/AdminTemplate';
 import UserManagement from './pages/Admin/UserManagement/UserManagement';
 import CourseManagement from './pages/Admin/CourseManagement/CourseManagement';
-import Test3 from './Test/KhaiTest/Test3';
-import SearchResult from './Test/KhaiTest/TestComponent/SearchResult';
 export const history = createBrowserHistory({ window });
 //
 const root = ReactDOM.createRoot(
@@ -42,13 +40,12 @@ root.render(
     <Routes>
       <Route path='' element={<HomeTemplate/>}>
         <Route index element={<Home/>}></Route>
+        <Route path='home' element={<Home/>}></Route>
         <Route path="*" element={<Navigate to="" />}></Route>
         <Route path='testkhai' element={<TestKhai/>}>
           <Route index element={<LinkTest/>}></Route>
           <Route path='test1' element={<Test1/>}></Route>
           <Route path='test2' element={<Test2/>}></Route>
-          <Route path='test3' element={<Test3/>}></Route>
-          <Route path='searchtest' element={<SearchResult/>}></Route>
         </Route>
         <Route path='testkien' element={<TestKien/>}></Route>
         <Route path='login' element={<Login/>}></Route>
