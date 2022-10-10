@@ -65,12 +65,12 @@ export default function Header({}: Props) {
         style={{ gridTemplateColumns: "1fr 2fr" }}
       >
         <div className="dropdown row">
-          <a
-            href="#"
+          <NavLink
+            to="/"
             className="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none"
           >
             <img height="50" src="./img/logo-cyber-2.png" alt="..." />
-          </a>
+          </NavLink>
         </div>
         <div className="d-flex align-items-center justify-content-between">
           <a

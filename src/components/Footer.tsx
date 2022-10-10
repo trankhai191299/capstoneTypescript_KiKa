@@ -1,17 +1,21 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 // import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 // import { faS,faB,faLocationDot,faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 type Props = {}
 
 export default function Footer({}: Props) {
   return (
-    <div className='footer mt-5 text-light'>
+    <div className='footer pt-5 text-light'>
       <div className="container">
         <div className="row">
           <div className="col-sm-4 mt-2 gr-1">
             <div className="p-2">
               <div className="logo">
-                <img src="./img/logo-cyber-1.png" alt="logo-cyber" />
+                <NavLink to={'/'}>
+                  <img src="./img/logo-cyber-1.png" alt="logo-cyber" />
+                </NavLink>
+                
                 <p>CyberSoft Academy - Hệ thống đào tạo lập trình chuyên sâu theo dự án thực tế</p>
               </div>
               <div className="advisement mt-5">

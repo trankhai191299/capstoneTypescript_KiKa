@@ -49,6 +49,9 @@ const courseReducer = createSlice({
     ) => {
       state.courseCategory = action.payload;
     },
+    getCourseDetailAction:(state,action:PayloadAction<CourseModel>)=>{
+      state.courseDetail = action.payload
+    }
   },
 });
 
@@ -56,6 +59,7 @@ export const {
   getAllCourseAction,
   getSearchCourseAction,
   getCourseCategoryAction,
+  getCourseDetailAction
 } = courseReducer.actions;
 
 export default courseReducer.reducer;
@@ -108,3 +112,18 @@ export const getCourseCategory = () => {
     }
   };
 };
+
+export const getCourseDetailApi = (id:any) =>{
+  return async (dispatch: AppDispatch)=>{
+    try {
+      let result = await http.get(`/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${id}`)
+      // console.log(result.data);
+
+      let courseDetail = result.data
+      const action = getCourseDetailAction(courseDetail)
+      dispatch(action)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
