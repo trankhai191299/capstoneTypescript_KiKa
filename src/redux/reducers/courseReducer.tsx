@@ -83,12 +83,14 @@ export const getCourseByName = (khoahoc: any) => {
       let result = await http.get(
         `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${khoahoc}&MaNhom=GP01`
       );
+      
       let searchArr: CourseModel[] = result.data;
 
       const action = getSearchCourseAction(searchArr);
       dispatch(action);
     } catch (error) {
       console.log(error);
+      
     }
   };
 };
