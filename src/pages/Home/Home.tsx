@@ -28,7 +28,7 @@ export default function Home({}: Props) {
             <img height="200" src={crs.hinhAnh} alt={crs.tenKhoaHoc} />
             <div className="card-body">
               <div className="d-flex flex-column">
-                <div>
+                <div style={{height: '50px'}}>
                   <p className="fw-semibold">{crs.tenKhoaHoc}</p>
                 </div>
                 <NavLink
