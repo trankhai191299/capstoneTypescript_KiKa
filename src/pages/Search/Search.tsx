@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { CourseModel } from '../../redux/reducers/courseReducer'
-
+import ReactPaginate from 'react-paginate'
 type Props = {
-  // searchInput:string,
+  
 }
 
 export default function Search({}: Props) {
- 
   const location = useLocation()
-  const arrSearch = location.state
+  const arrSearch:[] = location.state
+  const [pageNum,setPageNum] = useState(1)
+  const resultsPerPage:number = 3
+  const resultsFetched:number = pageNum * resultsPerPage
+  const pageCount:number = Math.ceil(arrSearch?.length / resultsPerPage)
+
   const renderSearch = () =>{
-    return arrSearch?.map((item:CourseModel,index:number)=>{
+    return arrSearch?.slice(resultsFetched,resultsFetched+resultsPerPage).map((item:CourseModel,index:number)=>{
       return (
         <NavLink to={"/"} className="col-12 item" key={index}>
           <div className="result">
@@ -31,17 +35,32 @@ export default function Search({}: Props) {
       );
     })
   }
+  const changePage = ({selected}:any) =>{
+    setPageNum(selected)
+  }
+  const renderPaginate = () =>{
+    if(arrSearch){
+      return <ReactPaginate 
+      previousLabel={"Prev"}
+      nextLabel={"Next"}
+      pageCount={pageCount}
+      onPageChange={changePage}
+      containerClassName={'paginationBtn'}
+      previousLinkClassName={'prevBtn'}
+      nextLinkClassName={'nextBtn'}
+      activeClassName={'activePagBtn'}
+      />
+    }
+  }
   return (
     <div className='search'>
       <div className="container mt-4">
-        <h2>Tìm thấy khóa học Front End</h2>
+        <h2>Tìm thấy {arrSearch!==null?arrSearch.length:0} khóa học liên quan đến từ khóa bạn tìm</h2>
         <div className="search-results mt-4">
           <div className="row">
             {renderSearch()}
           </div>
-          <div className="list-page text-center">
-            <p>prev 1 2 3 4 5 next</p>
-          </div>
+          {renderPaginate()}
         </div>
       </div>
     </div>
