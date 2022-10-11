@@ -140,7 +140,7 @@ export default function Header({}: Props) {
               />
             </a>
             <ul className="dropdown-menu text-small shadow">
-              <li>
+              {/* <li>
                 <a className="dropdown-item" href="#">
                   New project...
                 </a>
@@ -149,11 +149,11 @@ export default function Header({}: Props) {
                 <a className="dropdown-item" href="#">
                   Settings
                 </a>
-              </li>
+              </li> */}
               <li>
-                <a className="dropdown-item" href="#">
+                <NavLink className="dropdown-item" to={"/userinform"}>
                   Profile
-                </a>
+                </NavLink>
               </li>
               <li>
                 <hr className="dropdown-divider" />

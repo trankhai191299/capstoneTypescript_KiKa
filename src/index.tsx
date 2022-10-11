@@ -15,7 +15,7 @@ import { store } from './redux/configStore'
 //css+scss
 import "../node_modules/slick-carousel/slick/slick.css"; 
 import "../node_modules/slick-carousel/slick/slick-theme.css";
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import './assets/scss/styles.scss';
 //history
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
