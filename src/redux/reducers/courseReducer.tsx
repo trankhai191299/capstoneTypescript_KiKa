@@ -31,6 +31,7 @@ const initialState: any = {
   courseDetail: {},
   searchCourses: [],
   courseCategory: [],
+  courseByCategory:[]
 };
 
 const courseReducer = createSlice({
@@ -51,6 +52,9 @@ const courseReducer = createSlice({
     },
     getCourseDetailAction:(state,action:PayloadAction<CourseModel>)=>{
       state.courseDetail = action.payload
+    },
+    getCourseByCategoryAction:(state,action:PayloadAction<CourseModel[]>) => {
+      state.courseByCategory = action.payload
     }
   },
 });
@@ -59,7 +63,8 @@ export const {
   getAllCourseAction,
   getSearchCourseAction,
   getCourseCategoryAction,
-  getCourseDetailAction
+  getCourseDetailAction,
+  getCourseByCategoryAction
 } = courseReducer.actions;
 
 export default courseReducer.reducer;
@@ -124,6 +129,18 @@ export const getCourseDetailApi = (id:any) =>{
       dispatch(action)
     } catch (error) {
       console.log(error)
+    }
+  }
+}
+
+export const getCourseByCategoryApi = (maDanhMuc:string) => {
+  return async (dispatch : AppDispatch) => {
+    try{
+      let result = await http.get(`/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maDanhMuc}&MaNhom=GP01`)
+      let courseByCategory = result.data
+      const action = getCourseByCategoryAction(courseByCategory)
+    }catch (err) {
+      console.log(err)
     }
   }
 }

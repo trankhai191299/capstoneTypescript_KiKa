@@ -140,16 +140,6 @@ export default function Header({}: Props) {
               />
             </a>
             <ul className="dropdown-menu text-small shadow">
-              {/* <li>
-                <a className="dropdown-item" href="#">
-                  New project...
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Settings
-                </a>
-              </li> */}
               <li>
                 <NavLink className="dropdown-item" to={"/userinform"}>
                   Profile

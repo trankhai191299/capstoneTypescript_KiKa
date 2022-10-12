@@ -52,7 +52,9 @@ root.render(
         <Route path='register' element={<Register/>}></Route>
         <Route path='search' element={<Search/>}></Route>
         <Route path='userinform' element={<UserInform/>}></Route>
-        <Route path='category' element={<Category/>}></Route>
+        <Route path='category'>
+          <Route path=':maDanhMuc'></Route>
+        </Route>
         <Route path='detail'>
           <Route path=':id' element={<Detail/>}></Route>
         </Route>
