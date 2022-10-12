@@ -9,6 +9,7 @@ import {
 import { AppDispatch, RootState } from "../redux/configStore";
 import Search from "../pages/Search/Search";
 import { history } from "..";
+import { ACCESS_TOKEN, deleteStore, USER_LOGIN } from "../utils/setting";
 type Props = {};
 
 
@@ -57,6 +58,13 @@ export default function Header({}: Props) {
       history.push('/home')
     }
   }
+  const signOut = () =>{
+    const accessToken = ACCESS_TOKEN
+    const userLogin = USER_LOGIN
+    deleteStore(accessToken)
+    deleteStore(userLogin)
+    window.location.reload()
+  }
   const renderLoginBtn = () =>{
     if(localStorage.getItem('userLogin')){
       return <div className="flex-shrink-0 dropdown">
@@ -94,7 +102,12 @@ export default function Header({}: Props) {
           <hr className="dropdown-divider" />
         </li>
         <li>
-          <a className="dropdown-item" href="#">
+          <a className="dropdown-item" href="#" onClick={()=>{
+            if(window.confirm('Bạn muốn đăng xuất?')){
+              alert("Đăng xuất thành công")
+              signOut()
+            }
+          }}>
             Sign out
           </a>
         </li>
