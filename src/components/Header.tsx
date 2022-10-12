@@ -39,7 +39,7 @@ export default function Header({}: Props) {
    return arrCategory.map((cate: DanhMucKhoaHoc,index: number) => {
      return(
       <li key={index}>
-        <a href="#" className="dropdown-item">{cate.tenDanhMuc}</a>
+        <NavLink to={`/category/${cate.maDanhMuc}`} className="dropdown-item">{cate.tenDanhMuc}</NavLink>
       </li>
      )
    })
