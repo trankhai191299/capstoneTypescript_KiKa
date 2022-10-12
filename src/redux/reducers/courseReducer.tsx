@@ -139,6 +139,7 @@ export const getCourseByCategoryApi = (maDanhMuc:string) => {
       let result = await http.get(`/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maDanhMuc}&MaNhom=GP01`)
       let courseByCategory = result.data
       const action = getCourseByCategoryAction(courseByCategory)
+      dispatch(action)
     }catch (err) {
       console.log(err)
     }
