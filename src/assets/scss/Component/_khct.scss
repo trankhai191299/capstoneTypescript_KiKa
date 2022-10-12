@@ -1,0 +1,30 @@
+@import "../Base/base";
+@import "../Theme/variable";
+//---------------------------------------
+.my-course{
+    h3.main-title{
+        @include text($text-xl,$text-semibold,$text-cl-dark);
+    }
+    .courses{
+        border-top: 1px solid $bd-cl-dark;
+        padding-top: 10px;
+        margin-top: 25px;
+        .item{
+            .col-2{
+                img{
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+            .col-10{
+                h3.title{
+                    @include text($text-base,$text-semibold,$text-cl-dark);
+                }
+                p{
+                    @include text($text-sm-1,$text-medium,$text-cl-dark);
+                    opacity: .8;
+                }
+            }
+        }
+    }
+}
