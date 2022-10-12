@@ -7,7 +7,6 @@ import {
   getCourseCategory,
 } from "../redux/reducers/courseReducer";
 import { AppDispatch, RootState } from "../redux/configStore";
-import Search from "../pages/Search/Search";
 import { history } from "..";
 import { ACCESS_TOKEN, deleteStore, USER_LOGIN } from "../utils/setting";
 type Props = {};
@@ -63,6 +62,7 @@ export default function Header({}: Props) {
     const userLogin = USER_LOGIN
     deleteStore(accessToken)
     deleteStore(userLogin)
+    history.push('/home')
     window.location.reload()
   }
   const renderLoginBtn = () =>{
