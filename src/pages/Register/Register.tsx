@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { values } from 'lodash'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux/configStore'
-import {registerApi, RegisterModel} from '../../redux/reducers/userReducer'
+import {registerApi, UserModel} from '../../redux/reducers/userReducer'
 type Props = {}
 
 interface FormValues{
@@ -30,7 +30,7 @@ export default function Register({}: Props) {
       email: '',
       confirmMatKhau:'',
     },
-    onSubmit :(values:RegisterModel):void=>{
+    onSubmit :(values:UserModel):void=>{
       dispatch(registerApi(values))
     },
     validationSchema:Yup.object().shape({
@@ -43,7 +43,7 @@ export default function Register({}: Props) {
     })
   })
   return (
-    <div className='register'>
+    <div className='register mb-4'>
       <div className="container">
         <div className="row">
           <div className="col-6"></div>
