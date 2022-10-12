@@ -37,7 +37,7 @@ export default function Login({}: Props) {
           <h2 className=" mb-5 fw-semibold text-center">-Please Sign In-</h2>
           <div className="form-floating">
             <input
-              type="taiKhoan"
+              type="text"
               className="form-control"
               id="taiKhoan"
               onChange={frm.handleChange}
@@ -54,7 +54,7 @@ export default function Login({}: Props) {
           </div>
           <div className="form-floating">
             <input
-              type="matKhau"
+              type="password"
               className="form-control"
               id="matKhau"
               onChange={frm.handleChange}
