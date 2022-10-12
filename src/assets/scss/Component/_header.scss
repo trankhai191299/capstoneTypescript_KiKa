@@ -8,5 +8,8 @@ header{
         &:hover{
             background-color: $btn-cl-hprim!important;
         }
+        &.active{
+            background-color: $btn-cl-prim!important;
+        }
     }
 }
