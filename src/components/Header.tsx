@@ -94,7 +94,7 @@ export default function Header({}: Props) {
           </a>
         </li> */}
         <li>
-          <NavLink className="dropdown-item" to={"/userinform"}>
+          <NavLink className="dropdown-item" to={"/profile"}>
             Profile
           </NavLink>
         </li>

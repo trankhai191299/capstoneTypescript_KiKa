@@ -11,6 +11,7 @@ import {
   USER_LOGIN,
 } from "../../utils/setting";
 import { history } from "../../index";
+import { values } from "lodash";
 
 export interface LoginModel{
   taiKhoan: string,
@@ -21,9 +22,10 @@ export interface UserModel{
   matKhau: string,
   hoTen: string,
   soDT: string,
-  maNhom: string,
+  maNhom?: string,
   email: string,
   confirmMatKhau?:string,
+  maLoaiNguoiDung?:string,
 }
 const initialState:any = {
   userLogin: getStoreJson(USER_LOGIN),
@@ -87,3 +89,16 @@ export const registerApi = (values:UserModel) => {
     }
   };
 };
+export const updateUserApi = (values:UserModel)=>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      const result = await http.put('/QuanLyNguoiDung/CapNhatThongTinNguoiDung',values)
+      console.log(result);
+      const action = getProfileApi()
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+}

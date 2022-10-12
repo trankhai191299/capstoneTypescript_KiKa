@@ -51,7 +51,7 @@ root.render(
           <Route path="login" element={<Login />}></Route>
           <Route path="register" element={<Register />}></Route>
           <Route path="search" element={<Search />}></Route>
-          <Route path="userinform" element={<UserInform />}></Route>
+          <Route path="profile" element={<UserInform />}></Route>
           <Route path="category">
             <Route path=":maDanhMuc" element={<Category />}></Route>
           </Route>

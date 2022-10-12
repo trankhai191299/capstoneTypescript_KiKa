@@ -35,11 +35,11 @@ export default function Register({}: Props) {
     },
     validationSchema:Yup.object().shape({
       taiKhoan:Yup.string().required('Tài khoản không được để trống!'),
-      matKhau:Yup.string().required('Mật khẩu không được để trống!').min(6,"Mật khẩu có độ dài từ 6 đến 15 ký tự").max(15,"Mật khẩu có độ dài từ 6 đến 15 ký tự"),
+      matKhau:Yup.string().required('Mật khẩu không được để trống!').min(6,"Mật khẩu có độ dài từ 6 đến 32 ký tự").max(32,"Mật khẩu có độ dài từ 6 đến 32 ký tự"),
       hoTen:Yup.string().required('Yêu cầu họ tên!').matches(/^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*/,'Tên không đúng định dạng'),
       soDT:Yup.string().required('Phải có số điện thoại!').matches(/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/,'Số điện thoại không đúng định dạng(09...)').max(10,'Số điện thoại tối đa 10 số'),
       email:Yup.string().required('Email không được để trống!').email('Email sai định dạng. Xin hãy thử lại!'),
-      confirmMatKhau:Yup.string().required('Mật khẩu xác nhận không được để trống').min(6,'Mật khẩu xác nhận có độ dài từ 6 đến 15 ký tự').max(15,'Mật khẩu xác nhận có độ dài từ 6 đến 15 ký tự').when("matKhau", {is: (pass:string) => (pass && pass.length > 0 ? true : false),then: Yup.string().oneOf([Yup.ref("matKhau")],"Mật khẩu không khớp, xin vui lòng kiểm tra lại")}),
+      confirmMatKhau:Yup.string().required('Mật khẩu xác nhận không được để trống').min(6,'Mật khẩu xác nhận có độ dài từ 6 đến 32 ký tự').max(32,'Mật khẩu xác nhận có độ dài từ 6 đến 32 ký tự').when("matKhau", {is: (pass:string) => (pass && pass.length > 0 ? true : false),then: Yup.string().oneOf([Yup.ref("matKhau")],"Mật khẩu không khớp, xin vui lòng kiểm tra lại")}),
     })
   })
   return (
