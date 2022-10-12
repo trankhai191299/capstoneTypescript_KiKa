@@ -2,7 +2,7 @@ import React from "react";
 import { FormikProps, useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/configStore";
-import { loginApi, UserModel } from "../../redux/reducers/userReducer";
+import { loginApi, LoginModel } from "../../redux/reducers/userReducer";
 import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 type Props = {};
@@ -26,7 +26,7 @@ export default function Login({}: Props) {
         .min(6, "Password có độ dài từ 6 đến 32 ký tự")
         .max(32, "Password có độ dài từ 6 đến 32 ký tự"),
     }),
-    onSubmit: (values: UserModel) => {
+    onSubmit: (values: LoginModel) => {
       dispatch(loginApi(values));
     },
   });

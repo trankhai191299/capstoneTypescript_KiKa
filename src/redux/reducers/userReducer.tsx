@@ -12,11 +12,11 @@ import {
 } from "../../utils/setting";
 import { history } from "../../index";
 
-export interface UserModel{
+export interface LoginModel{
   taiKhoan: string,
   matKhau: string,
 }
-export interface RegisterModel{
+export interface UserModel{
   taiKhoan: string,
   matKhau: string,
   hoTen: string,
@@ -43,31 +43,45 @@ export const {getProfileAction} = userReducer.actions;
 
 export default userReducer.reducer;
 
-export const loginApi = (userLogin:UserModel) => {
+export const getProfileApi = () =>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      const result = await http.post('/QuanLyNguoiDung/ThongTinTaiKhoan')
+      setStoreJson(USER_LOGIN,result.data)
+      const action = getProfileAction(result.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+}
+
+export const loginApi = (userLogin:LoginModel) => {
   return async (dispatch:AppDispatch) => {
     try {
       const result = await http.post("/QuanLyNguoiDung/DangNhap", userLogin);
       setCookie(ACCESS_TOKEN, result.data.accessToken, 30);
       setStore(ACCESS_TOKEN, result.data.accessToken);
-      alert("dcm")
+      alert("Đăng nhập thành công")
       history.push("/home");
-      //const action = getProfileApi();
-      //dispatch(action);
+      const action = getProfileApi();
+      dispatch(action);
     } catch (error) {
       console.log(error);
     }
   };
 };
-export const registerApi = (values:RegisterModel) => {
+export const registerApi = (values:UserModel) => {
   return async (dispatch:AppDispatch) => {
     try {
       const result = await http.post("/QuanLyNguoiDung/DangKy", values);
   
-      console.log(result.data)
+      // console.log(result.data)
       alert('Đăng ký thành công!')
       history.push("/login");
-      //const action = getProfileApi();
-      //dispatch(action);
+      const action = getProfileApi();
+      dispatch(action);
     } catch (error) {
       console.log(error);
     }

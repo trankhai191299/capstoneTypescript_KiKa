@@ -57,7 +57,53 @@ export default function Header({}: Props) {
       history.push('/home')
     }
   }
-  
+  const renderLoginBtn = () =>{
+    if(localStorage.getItem('userLogin')){
+      return <div className="flex-shrink-0 dropdown">
+      <a
+        href="#"
+        className="d-block link-dark text-decoration-none dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img
+          src="https://picsum.photos/200"
+          alt="mdo"
+          width={32}
+          height={32}
+          className="rounded-circle"
+        />
+      </a>
+      <ul className="dropdown-menu text-small shadow">
+        {/* <li>
+          <a className="dropdown-item" href="#">
+            New project...
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item" href="#">
+            Settings
+          </a>
+        </li> */}
+        <li>
+          <NavLink className="dropdown-item" to={"/userinform"}>
+            Profile
+          </NavLink>
+        </li>
+        <li>
+          <hr className="dropdown-divider" />
+        </li>
+        <li>
+          <a className="dropdown-item" href="#">
+            Sign out
+          </a>
+        </li>
+      </ul>
+    </div>
+    }else{
+      return <NavLink to={'login'} className='btn btn-primary btn-login'>Đăng nhập</NavLink>
+    }
+  }
   return (
     <header className="py-3 border-bottom">
       <div
@@ -124,47 +170,9 @@ export default function Header({}: Props) {
               onChange={handleChange}
             />
           </form>
-          <div className="flex-shrink-0 dropdown">
-            <a
-              href="#"
-              className="d-block link-dark text-decoration-none dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="https://picsum.photos/200"
-                alt="mdo"
-                width={32}
-                height={32}
-                className="rounded-circle"
-              />
-            </a>
-            <ul className="dropdown-menu text-small shadow">
-              {/* <li>
-                <a className="dropdown-item" href="#">
-                  New project...
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Settings
-                </a>
-              </li> */}
-              <li>
-                <NavLink className="dropdown-item" to={"/userinform"}>
-                  Profile
-                </NavLink>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
+          {renderLoginBtn()}
+          
+          
         </div>
       </div>
     </header>

@@ -57,7 +57,7 @@ root.render(
           <Route path=':id' element={<Detail/>}></Route>
         </Route>
       </Route>
-      <Route path='amin' element={<AdminTemplate/>}>
+      <Route path='admin' element={<AdminTemplate/>}>
         <Route path='usermanagement'element={<UserManagement/>}></Route>
         <Route path='coursemanagement'element={<CourseManagement/>}></Route>
       </Route>
