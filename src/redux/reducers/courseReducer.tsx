@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../configStore";
 import { http } from "../../utils/setting";
+import { getProfileApi } from "./userReducer";
 export interface CourseModel {
   maKhoaHoc: string;
   biDanh: string;
@@ -25,6 +26,10 @@ export interface NguoiTao {
   hoTen: string;
   maLoaiNguoiDung: string;
   tenLoaiNguoiDung: string;
+}
+export interface DangKyKhoaHoc {
+  maKhoaHoc:string,
+  taiKhoan:string,
 }
 const initialState: any = {
   arrCourse: [],
@@ -142,6 +147,32 @@ export const getCourseByCategoryApi = (maDanhMuc:string) => {
       dispatch(action)
     }catch (err) {
       console.log(err)
+    }
+  }
+}
+// register submit
+export const registerCourseApi = (values:DangKyKhoaHoc)=>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      let result = await http.post('/QuanLyKhoaHoc/DangKyKhoaHoc',values)
+      const action = getProfileApi()
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+}
+export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      let result = await http.post('/QuanLyKhoaHoc/HuyGhiDanh',values)
+      
+      const action = getProfileApi()
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+      
     }
   }
 }

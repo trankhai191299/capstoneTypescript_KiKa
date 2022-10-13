@@ -1,11 +1,22 @@
-import React from 'react'
-import Carousel from '../../components/Carousel'
+import React, { useEffect } from 'react'
+import { history } from '../..';
 import KhoaHocCuaToi from '../../components/KhoaHocCuaToi';
 import ThongTinCaNhan from '../../components/ThongTinCaNhan';
+import { getProfileApi } from '../../redux/reducers/userReducer';
+import { ACCESS_TOKEN, getStore } from '../../utils/setting';
 
 type Props = {}
 
 export default function UserInform({}: Props) {
+  useEffect(()=>{
+    if (!getStore(ACCESS_TOKEN)) {
+      alert("Bắt buộc phải đăng nhập trước khi vào trang này");
+      history.push('/login')
+    }
+    if(getStore(ACCESS_TOKEN)){
+      getProfileApi()
+    }
+  },[])
   return (
     <div className="user-inform">
       <div className="carousel mb-4">

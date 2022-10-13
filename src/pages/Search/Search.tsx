@@ -17,7 +17,7 @@ export default function Search({}: Props) {
   const renderSearch = () =>{
     return arrSearch?.slice(resultsFetched,resultsFetched+resultsPerPage).map((item:CourseModel,index:number)=>{
       return (
-        <NavLink to={"/"} className="col-12 item" key={index}>
+        <NavLink to={`/detail/${item.maKhoaHoc}`} className="col-12 item" key={index}>
           <div className="result">
             <div className="row">
               <div className="col-2">
