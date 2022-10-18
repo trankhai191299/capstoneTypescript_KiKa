@@ -5,8 +5,8 @@ export default function Carousel() {
     <div className="carousel">
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-8"></div>
-          <div className="col-4 content">
+          <div className="col-lg-8 col-md-6 col-0"></div>
+          <div className="col-lg-4 col-md-6 col-12 content">
             <div className="title">
               <h1>Khởi đầu sự nghiệp của bạn</h1>
             </div>

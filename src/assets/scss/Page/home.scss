@@ -32,7 +32,11 @@
           .title {
             h1 {
               @include text($text-xxl, $text-bold, $text-cl-sp1);
+              @media screen and (max-width: 1200px){
+                @include text($text-xl, $text-bold, $text-cl-sp1);
+              }
             }
+
           }
           .description {
             p {

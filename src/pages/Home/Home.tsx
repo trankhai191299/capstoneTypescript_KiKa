@@ -23,7 +23,7 @@ export default function Home({}: Props) {
     let newArrCourse = randomCourse(arrCourse, 8);
     return newArrCourse.map((crs: CourseModel, index: number) => {
       return (
-        <div className="col-lg-3 col-12 mt-2" key={index}>
+        <div className="col-lg-3 col-md-6 col-12 mt-2" key={index}>
           <div className="card shadow p-3 mb-4 bg-body rounded border-white">
             <img height="200" src={crs.hinhAnh} alt={crs.tenKhoaHoc} />
             <div className="card-body">
