@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { history } from '..'
@@ -15,6 +16,30 @@ export default function KhoaHocCuaToi({}: Props) {
   const {userLogin} = useSelector((state:RootState)=>state.userReducer)
   const {chiTietKhoaHocGhiDanh} = userLogin?userLogin:[]
   const dispatch:AppDispatch = useDispatch()
+  const [pageNum,setPageNum] = useState(1)
+  useEffect(()=>{
+    getProfileApi()
+  },[chiTietKhoaHocGhiDanh?.length])
+  const resultPerPage:number = 3
+  const resultFetch:number = pageNum * resultPerPage
+  const pageCount:number = Math.ceil(chiTietKhoaHocGhiDanh?.length / resultPerPage)
+  const changePage = ({selected}:any)=>{
+    setPageNum(selected)
+  }
+  const renderPaginate = () =>{
+    if(chiTietKhoaHocGhiDanh){
+      return <ReactPaginate
+      previousLabel = {"Prev"}
+      nextLabel = {"Next"}
+      pageCount = {pageCount}
+      onPageChange = {changePage}
+      containerClassName={'paginationBtn'}
+      previousLinkClassName={'prevBtn'}
+      nextLinkClassName={'nextBtn'}
+      activeClassName={'activePagBtn'}
+      />
+    }
+  }
   // useEffect(()=>{
   //   if (!getStore(ACCESS_TOKEN)) {
   //     alert("Bắt buộc phải đăng nhập trước khi vào trang này");
@@ -24,12 +49,10 @@ export default function KhoaHocCuaToi({}: Props) {
   //     getProfileApi()
   //   }
   // },[])
-  useEffect(()=>{
-    getProfileApi()
-  },[chiTietKhoaHocGhiDanh?.length])
+  
   const renderKhoaHoc = () =>{
     if(chiTietKhoaHocGhiDanh?.length !== 0 ){
-      return chiTietKhoaHocGhiDanh?.map((course:CourseModel,index:number)=>{
+      return chiTietKhoaHocGhiDanh?.slice(resultFetch,resultFetch+resultPerPage).map((course:CourseModel,index:number)=>{
         return (
           <NavLink to={`/detail/${course.maKhoaHoc}`} className="col-12" key={index}>
             <div className="item">
@@ -71,6 +94,7 @@ export default function KhoaHocCuaToi({}: Props) {
           <div className="row">
             {renderKhoaHoc()}
           </div>
+          {renderPaginate()}
         </div>
       </div>
     </div>
