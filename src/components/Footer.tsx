@@ -8,8 +8,8 @@ export default function Footer({}: Props) {
   return (
     <div className='footer pt-5 text-light'>
       <div className="container">
-        <div className="row">
-          <div className="col-sm-4 mt-2 gr-1">
+        <div className="row pb-sm-4">
+          <div className="col-lg-4 col-md-6 col-12 mt-2 gr-1">
             <div className="p-2">
               <div className="logo">
                 <NavLink to={'/'}>
@@ -58,7 +58,7 @@ export default function Footer({}: Props) {
               </div>
             </div>
           </div>
-          <div className="col-sm-4 mt-4 gr-2">
+          <div className="col-lg-4 col-md-6 col-12 mt-4 gr-2">
             <h5>Đăng ký tư vấn</h5>
             <form>
               <div className="form-group">
@@ -72,7 +72,7 @@ export default function Footer({}: Props) {
               <a href="#">Lập trình FontEnd</a> <a href='#'>Lập trình React JS</a> <a href='#'>Lập trình React Angular</a> <a href='#'>Lập trình tư duy</a> <a href="#">Lập trình Node JS</a> <a href="#">Lập trình Backend</a> <a href="#">Lập trình Java Web</a> <a href="#">Lập trình Java Spring - Java Boot</a> <a href="#">Tôi Đi Code Dạo</a> <a href="#">Học SEO Hà Nội ở Vietnamoz</a> <a href="#">Học lập trình trực tuyến</a>
             </div>
           </div>
-          <div className="col-sm-4 mt-4 gr-3">
+          <div className="col-lg-4 d-none d-lg-block mt-4 gr-3">
             <div>
             <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Flophocviet%2F&tabs=timeline&width=250&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width={250} height={300} style={{border: 'none', overflow: 'hidden'}} scrolling="no" frameBorder={0} allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" />
 
