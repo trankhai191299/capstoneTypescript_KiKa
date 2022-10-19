@@ -6,6 +6,6 @@ Trần Hoàng Khải \
 Lê Trung Kiên 
 
 ## Link
---Git: https://github.com/trankhai191299/capstoneTypescript_KiKa.git\
+--Git: https://github.com/trankhai191299/capstoneTypescript_KiKa.git \
 --Youtube: \
 --Deploy: 
