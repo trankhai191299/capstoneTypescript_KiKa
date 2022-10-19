@@ -78,13 +78,13 @@ export default function Detail({}: Props) {
       </div>
       <div className="course-info">
         <div className="container py-4">
-          <h3>Mô tả Khóa học</h3>
-          <p className='course-name'>Tên khóa học: {courseDetail?.tenKhoaHoc} - {courseDetail?.maKhoaHoc}</p>
+          <h3 className='text-center mt-3 mb-5'>Mô tả Khóa học</h3>
+          <p className='course-name'>Tên khóa học: <span className='fw-bold'>{courseDetail?.tenKhoaHoc} - {courseDetail?.maKhoaHoc}</span> </p>
           <p className='create-date'>Ngày tạo: {courseDetail?.ngayTao}</p>
           <p className='description'>
             {courseDetail?.moTa}
           </p>
-          <p className='view'>Lượt xem: {courseDetail?.luotXem}</p>
+          <p className='view text-end'>Lượt xem: {courseDetail?.luotXem}</p>
         </div>
       </div>
     </div>

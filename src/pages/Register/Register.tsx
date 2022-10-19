@@ -46,10 +46,10 @@ export default function Register({}: Props) {
     <div className='register mb-4'>
       <div className="container">
         <div className="row">
-          <div className="col-6"></div>
-          <div className="col-6">
+          <div className="col-md-6 col-0"></div>
+          <div className="col-md-6 col-12">
             <div className="title mt-5">
-              <h3>Đăng ký</h3>
+              <h3 className='text-center fw-bold'>-- Đăng ký --</h3>
             </div>
             <div className="form-area mt-4">
               <form onSubmit={frm.handleSubmit}>
@@ -83,12 +83,12 @@ export default function Register({}: Props) {
                   <input type="text" name="soDT" className='form-control' onChange={frm.handleChange} onBlur={frm.handleBlur}/>
                   {frm.errors.soDT?<span className='text-danger fw-bold'>{frm.errors.soDT}</span>:''}
                 </div>
-                <div className="row mt-3">
+                <div className="row mt-4">
                   <div className="col-6">
-                    <button className='btn btn-success' type='submit'>Đăng ký</button>
+                    <button className='btn btn-warning' type='submit'>Đăng ký</button>
                   </div>
                   <div className="col-6">
-                    <NavLink to={'/login'} className='btn btn-primary'>Đăng nhập</NavLink>
+                    <NavLink to={'/login'} className='btn btn-secondary'>Đăng nhập</NavLink>
                   </div>
                 </div>
               </form>

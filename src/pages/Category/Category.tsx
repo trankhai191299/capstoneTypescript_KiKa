@@ -31,7 +31,7 @@ export default function Category({}: Props) {
   const renderCourseByCategory = () => {
     return courseByCategory?.map((crs: CourseModel, index: number) => {
       return (
-        <div className="col-lg-3 col-12 mt-2" key={index}>
+        <div className="col-lg-3 col-md-6 col-12 mt-2" key={index}>
           <div className="card shadow p-3 mb-4 bg-body rounded border-white">
             <img height="200" src={crs.hinhAnh} alt={crs.tenKhoaHoc} />
             <div className="card-body">
@@ -54,7 +54,7 @@ export default function Category({}: Props) {
   };
   return (
     <div className="container">
-      <h2>Các khóa học phổ biến</h2>
+      <h2 className="mt-3 mb-4">Các khóa học phổ biến</h2>
       <div className="row">
         {renderCourseByCategory()}
       </div>
