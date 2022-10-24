@@ -11,7 +11,7 @@ import {
   USER_LOGIN,
 } from "../../utils/setting";
 import { history } from "../../index";
-import { values } from "lodash";
+import { isBuffer, values } from "lodash";
 
 export interface LoginModel{
   taiKhoan: string,
@@ -52,9 +52,8 @@ export const getProfileApi = () =>{
       setStoreJson(USER_LOGIN,result.data)
       const action = getProfileAction(result.data)
       dispatch(action)
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
-      
     }
   }
 }
@@ -63,14 +62,20 @@ export const loginApi = (userLogin:LoginModel) => {
   return async (dispatch:AppDispatch) => {
     try {
       const result = await http.post("/QuanLyNguoiDung/DangNhap", userLogin);
-      setCookie(ACCESS_TOKEN, result.data.accessToken, 30);
-      setStore(ACCESS_TOKEN, result.data.accessToken);
-      alert("Đăng nhập thành công")
-      history.push("/home");
-      const action = getProfileApi();
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
+      if(result){
+        setCookie(ACCESS_TOKEN, result.data.accessToken, 30);
+        setStore(ACCESS_TOKEN, result.data.accessToken);
+        alert("Đăng nhập thành công")
+        history.push("/home");
+        const action = getProfileApi();
+        dispatch(action);
+      }
+    } catch (error:any) {
+      let statusCode:number = error?.response?.status
+      let data:string = error?.response?.data
+      if(statusCode===500){
+        alert(data)
+      }
     }
   };
 };
@@ -84,8 +89,12 @@ export const registerApi = (values:UserModel) => {
       history.push("/login");
       const action = getProfileApi();
       dispatch(action);
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      let statusCode:number = error?.response?.status
+      let data:string = error?.response?.data
+      if(statusCode===500){
+        alert(data)
+      }
     }
   };
 };
@@ -96,7 +105,7 @@ export const updateUserApi = (values:UserModel)=>{
       console.log(result);
       const action = getProfileApi()
       dispatch(action)
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
       
     }

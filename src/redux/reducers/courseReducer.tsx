@@ -85,7 +85,7 @@ export const getAllCourseApi = () => {
 
       const action = getAllCourseAction(arrSubject);
       dispatch(action);
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
     }
   };
@@ -97,12 +97,13 @@ export const getCourseByName = (khoahoc: any) => {
       let result = await http.get(
         `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${khoahoc}&MaNhom=GP01`
       );
+      if(result){
+        let searchArr: CourseModel[] = result.data;
+        const action = getSearchCourseAction(searchArr);
+        dispatch(action);
+      }
       
-      let searchArr: CourseModel[] = result.data;
-
-      const action = getSearchCourseAction(searchArr);
-      dispatch(action);
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
       
     }
@@ -117,7 +118,7 @@ export const getCourseCategory = () => {
       // console.log(result);
       const action = getCourseCategoryAction(arrCate);
       dispatch(action);
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
     }
   };
@@ -132,7 +133,7 @@ export const getCourseDetailApi = (id:any) =>{
       let courseDetail = result.data
       const action = getCourseDetailAction(courseDetail)
       dispatch(action)
-    } catch (error) {
+    } catch (error:any) {
       console.log(error)
     }
   }
@@ -157,7 +158,7 @@ export const registerCourseApi = (values:DangKyKhoaHoc)=>{
       let result = await http.post('/QuanLyKhoaHoc/DangKyKhoaHoc',values)
       const action = getProfileApi()
       dispatch(action)
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
       
     }
@@ -170,7 +171,7 @@ export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
       
       const action = getProfileApi()
       dispatch(action)
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
       
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { CourseModel } from '../../redux/reducers/courseReducer'
 import ReactPaginate from 'react-paginate'
@@ -13,9 +13,12 @@ export default function Search({}: Props) {
   const resultsPerPage:number = 3
   const resultsFetched:number = pageNum * resultsPerPage
   const pageCount:number = Math.ceil(arrSearch?.length / resultsPerPage)
-
+  useEffect(() => {
+    renderSearch()
+  }, [arrSearch?.length])
+  
   const renderSearch = () =>{
-    return arrSearch?.slice(resultsFetched,resultsFetched+resultsPerPage).map((item:CourseModel,index:number)=>{
+    return arrSearch?.slice(arrSearch.length>=3?resultsFetched:0,resultsFetched+resultsPerPage).map((item:CourseModel,index:number)=>{
       return (
         <NavLink to={`/detail/${item.maKhoaHoc}`} className="col-12 item" key={index}>
           <div className="result">

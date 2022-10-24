@@ -1,6 +1,4 @@
-import { typeOptions } from "@testing-library/user-event/dist/type/typeImplementation";
 import axios from "axios";
-import { history } from "../index";
 export const config = {
     setCookie:(name:string,value:string,days:number)=>{
         var expires = "";
@@ -71,25 +69,24 @@ http.interceptors.request.use(
       }
       // config.headers['Content-Type'] = 'application/json';
       return config
-    },
-    error => {
+    },(error) => {
       Promise.reject(error)
     }
   )
 /*Cau hinh response*/
-http.interceptors.response.use((response)=>{
-    return response
-},err=>{
-    if(err.response.status === '400' || err.response.status === '404'){
-        history.push('/')
-        return Promise.reject(err)
-    }
-    if(err.response.status === '401' || err.response.status === '403'){
-        alert('Token không hợp lệ! Vui lòng đăng nhập lại')
-        history.push('/login')
-        return Promise.reject(err)
-    }
-})
+// http.interceptors.response.use((response)=>{
+//     return response
+// },err=>{
+//     if(err.response.status === '400' || err.response.status === '404'){
+//         history.push('/')
+//         return Promise.reject(err)
+//     }
+//     if(err.response.status === '401' || err.response.status === '403'){
+//         alert('Token không hợp lệ! Vui lòng đăng nhập lại')
+//         history.push('/login')
+//         return Promise.reject(err)
+//     }
+// })
 
 export const randomCourse = (arr:Array<[]>, quantity: number) => {
     let newArr : any = [];
