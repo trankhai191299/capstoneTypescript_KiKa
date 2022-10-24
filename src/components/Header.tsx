@@ -132,60 +132,32 @@ export default function Header({}: Props) {
           </NavLink>
         </div>
         <div className="d-flex align-items-center justify-content-between">
-          <a
-            href="#"
-            className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img height="20" src="./img/bar.png" alt="" />
-            <p className="mt-3">Danh muc khoa hoc</p>
-          </a>
-          <ul className="dropdown-menu text-small shadow">
-            {renderCategory()}
-            {/* <li>
-              <a className="dropdown-item" href="#">
-                Inventory
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Customers
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Products
-              </a>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Reports
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Analytics
-              </a>
-            </li> */}
-          </ul>
+          <div className="d-none d-md-block me-md-2">
+            <a
+              href="#"
+              className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img height="20" src="./img/bar.png" alt="" />
+              <p className="mt-3">Danh muc khoa hoc</p>
+            </a>
+            <ul className="dropdown-menu text-small shadow">
+              {renderCategory()}
+            </ul>
+          </div>
           <form className="w-50 me-3" role="search">
             <input
               type="search"
               className="form-control"
               placeholder="Search..."
               aria-label="Search"
-              name='searchKhoaHoc'
+              name="searchKhoaHoc"
               id="searchKhoaHoc"
               onChange={handleChange}
             />
           </form>
           {renderLoginBtn()}
-          
-          
         </div>
       </div>
     </header>
