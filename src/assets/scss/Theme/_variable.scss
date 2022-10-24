@@ -38,6 +38,10 @@ $btn-cl-prim:#d4b03c;
 $btn-cl-hprim:#b09338;
 $btn-cl-dark:#000;
 $btn-cl-light:#fff;
+
+$mobile-width: 480px; 
+$tablet-width: 768px; 
+$desktop-width: 1024px;
 //-----------------mixin
 @mixin text($fs:$text-base,$fw:$text-regular,$c:$text-cl-dark){
     font-size: $fs;
@@ -57,7 +61,10 @@ $btn-cl-light:#fff;
         color: $c-h;
     }
 }
-
+@mixin tablet { @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {       
+    @content;
+  } 
+ } 
 
 
 
