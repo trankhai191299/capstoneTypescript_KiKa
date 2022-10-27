@@ -7,11 +7,11 @@ type Props = {};
 
 export default function AdminTemplate({}: Props) {
   return (
-    <div className="row">
-      <div className="col-lg-3">
+    <div className="d-flex flex-row">
+      <div>
         <AdminHeader />
       </div>
-      <div className="col-lg-9">
+      <div style={{width:'100%'}}>
         <AdminNavbar/>
         <Outlet />
       </div>

@@ -1,0 +1,11 @@
+@import '../../Base/base';
+@import '../../Theme/variable';
+//---------------------------------------
+.course-management{
+    margin-top: 15px;
+    .course-title{
+        h3{
+            font-weight: $text-semibold;
+        }
+    }
+}
