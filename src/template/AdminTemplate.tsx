@@ -6,11 +6,11 @@ type Props = {};
 
 export default function AdminTemplate({}: Props) {
   return (
-    <div className="row">
-      <div className="col-lg-4">
+    <div className="d-flex flex-row">
+      <div>
         <AdminHeader />
       </div>
-      <div className="col-lg-8">
+      <div className="ms-5">
         <Outlet />
       </div>
     </div>
