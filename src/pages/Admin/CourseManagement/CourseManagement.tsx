@@ -4,7 +4,7 @@ type Props = {}
 
 export default function CourseManagement({}: Props) {
   return (
-    <div className='container course-management'>
+    <div className="container course-management">
       <div className="userContainer mt-5 d-none">
         <button
           type="button"
@@ -61,8 +61,8 @@ export default function CourseManagement({}: Props) {
         <h3>Thêm khóa học</h3>
       </div>
       <div className="mt-5">
-        <input type="search" placeholder="Search" />
-        <button className="btn btn-dark btn-sm">Search</button>
+        <input type="search" placeholder="Họ tên ghi danh" />
+        <button className="btn btn-dark btn-sm">Tìm kiếm</button>
       </div>
       <div className="d-flex mt-5">
         <div className="table-responsive border border-dark">
@@ -79,13 +79,15 @@ export default function CourseManagement({}: Props) {
               </tr>
             </thead>
             <tbody>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
