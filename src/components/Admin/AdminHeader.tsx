@@ -18,14 +18,14 @@ export default function AdminHeader() {
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <a href="#" className="nav-link active" aria-current="page">
             <svg className="bi pe-none me-2" width={13} height={16}>
               <use xlinkHref="#home" />
             </svg>
             Home
           </a>
-        </li>
+        </li> */}
         <li className="nav-item">
           <div>
             <button
@@ -46,7 +46,7 @@ export default function AdminHeader() {
                     to={"/admin/usermanagement"}
                     className="link-white d-inline-flex text-decoration-none rounded text-white pb-2 pt-2 ms-5"
                   >
-                    User Management
+                    Quản lý Người dùng
                   </NavLink>
                 </li>
                 <li>
@@ -54,7 +54,7 @@ export default function AdminHeader() {
                     to={"/admin/coursemanagement"}
                     className="link-white d-inline-flex text-decoration-none rounded text-white pb-2 pt-2 ms-5"
                   >
-                    Courese Management
+                    Quản lý Khóa học
                   </NavLink>
                 </li>
               </ul>
