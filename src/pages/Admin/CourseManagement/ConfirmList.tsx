@@ -13,7 +13,6 @@ export default function ConfirmList({maKh}: Props) {
     const action = registeredUserListApi(maKh)
     dispatch(action)
   }
-  console.log(maKh);
   useEffect(()=>{
     registerList(maKh)
   },[maKh])

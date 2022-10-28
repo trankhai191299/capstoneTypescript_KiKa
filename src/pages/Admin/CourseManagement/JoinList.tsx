@@ -13,7 +13,7 @@ export default function JoinList({maKh}: Props) {
     const action = waitingUserListApi(maKh)
     dispatch(action)
   }
-  console.log(maKh);
+  
   useEffect(()=>{
     waitingList(maKh)
   },[maKh])
