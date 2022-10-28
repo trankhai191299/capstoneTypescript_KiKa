@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/configStore";
 import * as Yup from "yup";
 import { registerApi, UserModel } from "../../../redux/reducers/userReducer";
+import ConfirmList from "./ConfirmList";
+import JoinList from "./JoinList";
 
 type Props = {};
 interface FormValues {
@@ -27,7 +29,7 @@ export default function UserManagement({}: Props) {
       soDT: "",
       maNhom: "GP01",
       email: "",
-      loaiNguoiDung: '',
+      loaiNguoiDung: "",
     },
     onSubmit: (values: UserModel): void => {
       dispatch(registerApi(values));
@@ -57,19 +59,11 @@ export default function UserManagement({}: Props) {
     }),
   });
   return (
-    <div>
+    <div className="user-management">
       <div className="userContainer mt-5">
-        <button
-          type="button"
-          className="btn btn-dark btn-lg"
-          data-bs-toggle="modal"
-          data-bs-target="#modalId"
-        >
-          Thêm người dùng
-        </button>
         <div
           className="modal fade"
-          id="modalId"
+          id="modalId1"
           tabIndex={-1}
           data-bs-backdrop="static"
           data-bs-keyboard="false"
@@ -153,6 +147,13 @@ export default function UserManagement({}: Props) {
                     >
                       Tai Khoan
                     </label>
+                    {frm.errors.taiKhoan ? (
+                      <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
+                        {frm.errors.taiKhoan}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className="col-md-6 form-floating mb-4">
                     <input
@@ -253,33 +254,112 @@ export default function UserManagement({}: Props) {
           </div>
         </div>
       </div>
-      <div className="mt-5">
-        <input type="search" placeholder="Search" />
-        <button className="btn btn-dark btn-sm">Search</button>
+      <div
+        className="modal fade"
+        id="modalId"
+        tabIndex={-1}
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        role="dialog"
+      >
+        <div
+          className="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered"
+          role="document"
+        >
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+              />
+            </div>
+            <div className="modal-body">
+              <div className="content-1">
+                <h4>Chọn người dùng</h4>
+                <div className="form">
+                  <div className="form-group">
+                    <div className="row">
+                      <div className="col-10">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Tên người dùng"
+                        />
+                      </div>
+                      <div className="col-2">
+                        <button className="btn btn-light">Ghi danh</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="content-2">
+                <ConfirmList />
+              </div>
+
+              <div className="content-3">
+                <JoinList />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div className="course-title text-center">
+        <h3>Quản lý người dùng</h3>
+      </div>
+      <form className="mt-5">
+        <div className="form-group">
+          <input
+            className="form-control mb-2"
+            type="search"
+            placeholder="Nhập vào tại khoản hoặc tên người dùng"
+          />
+          <button className="btn btn-dark btn-sm">Tìm kiếm</button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm ms-2"
+            data-bs-toggle="modal"
+            data-bs-target="#modalId1"
+          >
+            Thêm người dùng
+          </button>
+        </div>
+      </form>
       <div className="d-flex mt-5">
         <div className="table-responsive border border-dark">
-          <table className="table align-middle">
+          <table className="table table-striped align-middle text-center">
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Tai Khoan</th>
-                <th>Mat Khau</th>
-                <th>Ho Ten</th>
+                <th>Tài Khoản</th>
+                <th>Mật Khẩu</th>
+                <th>Họ Tên</th>
                 <th>Email</th>
-                <th>So Dien Thoai</th>
-                <th>Thao Tac</th>
+                <th>Số điện thoại</th>
+                <th>Thao Tác</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>ITec0123</td>
+                <td>********</td>
+                <td>Le Van A</td>
+                <td>AA@gmail.com</td>
+                <td>0909090909</td>
+                <td>
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalId"
+                    className="btn btn-success m-2"
+                  >
+                    Ghi danh
+                  </button>
+                  <button className="btn btn-warning m-2">Cập nhật</button>
+                  <button className="btn btn-danger m-2">X</button>
+                </td>
               </tr>
             </tbody>
           </table>
