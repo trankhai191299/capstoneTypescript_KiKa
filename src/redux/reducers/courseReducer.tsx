@@ -75,6 +75,7 @@ export const {
 export default courseReducer.reducer;
 
 //------------------action api
+//lay toan bo khoa hoc
 export const getAllCourseApi = () => {
   return async (dispatch: AppDispatch) => {
     try {
@@ -90,7 +91,7 @@ export const getAllCourseApi = () => {
     }
   };
 };
-
+//lay khoa hoc theo ten
 export const getCourseByName = (khoahoc: any) => {
   return async (dispatch: AppDispatch) => {
     try {
@@ -109,7 +110,7 @@ export const getCourseByName = (khoahoc: any) => {
     }
   };
 };
-
+//lay danh muc khoa hoc
 export const getCourseCategory = () => {
   return async (dispatch: AppDispatch) => {
     try {
@@ -123,7 +124,7 @@ export const getCourseCategory = () => {
     }
   };
 };
-
+//lay thong tin chi tiet khoa hoc
 export const getCourseDetailApi = (id:any) =>{
   return async (dispatch: AppDispatch)=>{
     try {
@@ -138,7 +139,7 @@ export const getCourseDetailApi = (id:any) =>{
     }
   }
 }
-
+//lay khoa hoc theo danh muc
 export const getCourseByCategoryApi = (maDanhMuc:string) => {
   return async (dispatch : AppDispatch) => {
     try{
@@ -151,7 +152,7 @@ export const getCourseByCategoryApi = (maDanhMuc:string) => {
     }
   }
 }
-// register submit
+// dang ky khoa hoc
 export const registerCourseApi = (values:DangKyKhoaHoc)=>{
   return async (dispatch:AppDispatch)=>{
     try {
@@ -164,6 +165,7 @@ export const registerCourseApi = (values:DangKyKhoaHoc)=>{
     }
   }
 }
+//huy dang ky khoa hoc
 export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
   return async (dispatch:AppDispatch)=>{
     try {

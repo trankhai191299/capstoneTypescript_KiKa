@@ -29,6 +29,7 @@ import Test2 from "./Test/KhaiTest/Test2";
 import AdminTemplate from "./template/AdminTemplate";
 import UserManagement from "./pages/Admin/UserManagement/UserManagement";
 import CourseManagement from "./pages/Admin/CourseManagement/CourseManagement";
+import AddCourse from "./pages/Admin/CourseManagement/AddCourse";
 export const history = createBrowserHistory({ window });
 //
 const root = ReactDOM.createRoot(
@@ -62,6 +63,7 @@ root.render(
         <Route path="admin" element={<AdminTemplate />}>
           <Route path="usermanagement" element={<UserManagement />}></Route>
           <Route path="coursemanagement" element={<CourseManagement />}></Route>
+          <Route path="addcourse" element={<AddCourse />}></Route>
         </Route>
       </Routes>
     </HistoryRouter>

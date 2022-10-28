@@ -4,8 +4,27 @@
 .course-management{
     margin-top: 15px;
     .course-title{
-        h3{
-            font-weight: $text-semibold;
+        a{
+            @include text($text-base,$text-semibold,$text-cl-dark);
+            transition: all .2s;
+            &:hover{
+                @include text($text-base,$text-semibold,$text-cl-sp1);
+            }
+        }
+    }
+    .course-table{
+        .table{
+            tr{
+                th,td{
+                    text-align: center;
+                }
+                th.tkh{
+                    width: 125px;
+                }
+                th.ha{
+                    width: 100px;
+                }
+            }
         }
     }
     .modal{

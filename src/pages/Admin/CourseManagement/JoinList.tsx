@@ -1,5 +1,34 @@
-type Props = {}
-export default function JoinList({}: Props) {
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../../redux/configStore"
+import { UserModel, waitingUserListApi } from "../../../redux/reducers/userReducer"
+
+type Props = {
+  maKh:string,
+}
+export default function JoinList({maKh}: Props) {
+  const {waitingUsers} = useSelector((state:RootState)=>state.userReducer)
+  const dispatch:AppDispatch = useDispatch()
+  const waitingList = (maKh:string) =>{
+    const action = waitingUserListApi(maKh)
+    dispatch(action)
+  }
+  console.log(maKh);
+  useEffect(()=>{
+    waitingList(maKh)
+  },[maKh])
+  const renderWaiting = () =>{
+    return waitingUsers.map((user:UserModel,index:number)=>{
+      return <tr className="text-center" key={index}>
+      <td>{index+1}</td>
+      <td>{user.taiKhoan}</td>
+      <td>{user.hoTen}</td>
+      <td>
+        <button className="btn btn-danger">Hủy</button>
+      </td>
+    </tr>
+    })
+  }
   return (
     <div className="joined-list">
       <div className="d-flex justify-content-between">
@@ -17,22 +46,15 @@ export default function JoinList({}: Props) {
             </tr>
           </thead>
           <tbody>
-            <tr className="text-center">
-              <td>1</td>
-              <td>Hello</td>
-              <td>Bruh C</td>
-              <td>
-                <button className="btn btn-danger">Hủy</button>
-              </td>
-            </tr>
-            <tr className="text-center">
+            {renderWaiting()}
+            {/* <tr className="text-center">
               <td>2</td>
               <td>Hello</td>
               <td>Bruh D</td>
               <td>
                 <button className="btn btn-danger">Hủy</button>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
     </div>

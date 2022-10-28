@@ -29,6 +29,8 @@ export interface UserModel{
 }
 const initialState:any = {
   userLogin: getStoreJson(USER_LOGIN),
+  registeredUsers : [],
+  waitingUsers: [],
 };
 
 const userReducer = createSlice({
@@ -37,14 +39,21 @@ const userReducer = createSlice({
   reducers: {
     getProfileAction: (state,action:PayloadAction<UserModel[]>) => {
       state.userLogin = action.payload
+    },
+    registeredUserListAction: (state,action:PayloadAction<UserModel[]>)=>{
+      state.registeredUsers = action.payload
+    },
+    waitingUserListAction: (state,action:PayloadAction<UserModel[]>)=>{
+      state.waitingUsers = action.payload
     }
   },
 });
 
-export const {getProfileAction} = userReducer.actions;
+export const {getProfileAction,registeredUserListAction,waitingUserListAction} = userReducer.actions;
 
 export default userReducer.reducer;
-
+//----------------------action api
+//lay thong tin
 export const getProfileApi = () =>{
   return async (dispatch:AppDispatch)=>{
     try {
@@ -57,7 +66,7 @@ export const getProfileApi = () =>{
     }
   }
 }
-
+//dang nhap
 export const loginApi = (userLogin:LoginModel) => {
   return async (dispatch:AppDispatch) => {
     try {
@@ -79,6 +88,7 @@ export const loginApi = (userLogin:LoginModel) => {
     }
   };
 };
+//dang ky
 export const registerApi = (values:UserModel) => {
   return async (dispatch:AppDispatch) => {
     try {
@@ -98,16 +108,41 @@ export const registerApi = (values:UserModel) => {
     }
   };
 };
+//cap nhat nguoi dung
 export const updateUserApi = (values:UserModel)=>{
   return async (dispatch:AppDispatch)=>{
     try {
       const result = await http.put('/QuanLyNguoiDung/CapNhatThongTinNguoiDung',values)
-      console.log(result);
+      // console.log(result);
       const action = getProfileApi()
       dispatch(action)
     } catch (error:any) {
       console.log(error);
       
+    }
+  }
+}
+//lay danh sach ng dung da ghi danh khoa hoc
+export const registeredUserListApi = (makh:string) =>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      const result = await http.post('/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc',makh)
+      const action = registeredUserListAction(result.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+//lay danh sach ng dung cho xet duyet
+export const waitingUserListApi = (makh:string) =>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      const result = await http.post('/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet',makh)
+      const action = waitingUserListAction(result.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
     }
   }
 }
