@@ -1,3 +1,4 @@
+import { type } from 'os';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -6,7 +7,6 @@ import { CourseModel, getAllCourseApi } from '../../../redux/reducers/courseRedu
 import ConfirmList from './ConfirmList'
 import JoinList from './JoinList';
 type Props = {}
-
 export default function CourseManagement({}: Props) {
   const {arrCourse} = useSelector((state:RootState)=>state.courseReducer)
   const [maKh,setMaKh] = useState("")
@@ -36,7 +36,7 @@ export default function CourseManagement({}: Props) {
         >
           Ghi danh
         </button>
-        <button className="btn btn-warning m-2">Cập nhật</button>
+        <NavLink to={'/admin/addcourse'} className="btn btn-warning m-2" state={{course:course}}>Cập nhật</NavLink>
         <button className="btn btn-danger m-2">X</button>
       </td>
     </tr>
@@ -95,7 +95,20 @@ export default function CourseManagement({}: Props) {
         </div>
       </div>
       <div className="course-title">
-        <NavLink to={'/admin/addcourse'}>Thêm khóa học</NavLink>
+        <NavLink to={'/admin/addcourse'} state={{course:{
+          maKhoaHoc: '',
+          tenKhoaHoc: '',
+          moTa: '',
+          luotXem: '',
+          hinhAnh: '',
+          ngayTao: '',
+          nguoiTao: {
+            hoTen:'',
+          },
+          danhMucKhoaHoc: {
+            tenDanhMuc:'',
+          },
+        }}}>Thêm khóa học</NavLink>
       </div>
       <form className="mt-5">
         <div className="form-group">

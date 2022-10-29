@@ -165,6 +165,18 @@ export const registerCourseApi = (values:DangKyKhoaHoc)=>{
     }
   }
 }
+//ghi danh khoa hoc
+export const ghiDanhApi = (values:DangKyKhoaHoc) =>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      let result = await http.post('/QuanLyKhoaHoc/GhiDanhKhoaHoc',values)
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+}
 //huy dang ky khoa hoc
 export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
   return async (dispatch:AppDispatch)=>{
@@ -175,7 +187,6 @@ export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
       dispatch(action)
     } catch (error:any) {
       console.log(error);
-      
     }
   }
 }
