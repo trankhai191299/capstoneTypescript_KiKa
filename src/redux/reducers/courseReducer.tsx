@@ -15,6 +15,19 @@ export interface CourseModel {
   nguoiTao: NguoiTao;
   danhMucKhoaHoc: DanhMucKhoaHoc;
 }
+export interface CourseModel2{
+  maKhoaHoc: string;
+  biDanh?: string;
+  tenKhoaHoc: string;
+  moTa: string;
+  luotXem: 0;
+  danhGia: 0;
+  hinhAnh: string;
+  maNhom?: string;
+  ngayTao: string;
+  maDanhMucKhoaHoc: string;
+  taiKhoanNguoiTao: string;
+}
 export interface MaKh {
   maKhoaHoc: string;
 }
@@ -189,6 +202,32 @@ export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
       dispatch(action)
     } catch (error:any) {
       console.log(error);
+    }
+  }
+}
+//them khoa hoc
+export const themKhoaHocApi = (values:CourseModel2) =>{
+  return async(dispatch:AppDispatch)=>{
+    try {
+      const result = await http.post('/QuanLyKhoaHoc/ThemKhoaHoc',values)
+
+      console.log(result.data);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+}
+//cap nhat khoa hoc
+export const capNhatKhoaHocApi = (values:CourseModel2) =>{
+  return async(dispatch:AppDispatch)=>{
+    try {
+      const result = await http.put('/QuanLyKhoaHoc/CapNhatKhoaHoc',values)
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+      
     }
   }
 }

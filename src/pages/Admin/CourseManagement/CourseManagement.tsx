@@ -24,6 +24,8 @@ export default function CourseManagement({}: Props) {
     dispatch(getAllCourseApi());
   }, [])
   const renderCourse = () => {
+    // console.log(arrCourse);
+    
     return arrCourse?.map((course:CourseModel,index:number)=>{
       return <tr key={index}>
       <td className='stt'>{index+1}</td>
@@ -112,15 +114,12 @@ export default function CourseManagement({}: Props) {
           maKhoaHoc: '',
           tenKhoaHoc: '',
           moTa: '',
-          luotXem: '',
+          luotXem: 0,
+          danhGia:0,
           hinhAnh: '',
           ngayTao: '',
-          nguoiTao: {
-            hoTen:'',
-          },
-          danhMucKhoaHoc: {
-            tenDanhMuc:'',
-          },
+          taiKhoanNguoiTao: '',
+          maDanhMucKhoaHoc:'',
         }}}>Thêm khóa học</NavLink>
       </div>
       <div className="d-flex mt-4 course-table">
