@@ -79,10 +79,13 @@ export const loginApi = (userLogin: LoginModel) => {
         setCookie(ACCESS_TOKEN, result.data.accessToken, 30);
         setStore(ACCESS_TOKEN, result.data.accessToken);
         alert("Đăng nhập thành công");
+        console.log(result.data.maLoaiNguoiDung);
         if (result.data.maLoaiNguoiDung === "HV") {
           history.push("/home");
+        } else {
+          history.push("/admin");
         }
-        history.push("/admin");
+
         const action = getProfileApi();
         dispatch(action);
       }
