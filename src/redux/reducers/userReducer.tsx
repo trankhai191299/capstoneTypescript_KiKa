@@ -12,6 +12,7 @@ import {
 } from "../../utils/setting";
 import { history } from "../../index";
 import { isBuffer, values } from "lodash";
+import { MaKh } from "./courseReducer";
 
 export interface LoginModel {
   taiKhoan: string;
@@ -27,6 +28,7 @@ export interface UserModel {
   confirmMatKhau?: string;
   maLoaiNguoiDung?: string;
 }
+
 const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
   registeredUsers: [],
@@ -79,7 +81,7 @@ export const loginApi = (userLogin: LoginModel) => {
         setCookie(ACCESS_TOKEN, result.data.accessToken, 30);
         setStore(ACCESS_TOKEN, result.data.accessToken);
         alert("Đăng nhập thành công");
-        console.log(result.data.maLoaiNguoiDung);
+        // console.log(result.data.maLoaiNguoiDung);
         if (result.data.maLoaiNguoiDung === "HV") {
           history.push("/home");
         } else {
@@ -135,13 +137,10 @@ export const updateUserApi = (values: UserModel) => {
   };
 };
 //lay danh sach ng dung da ghi danh khoa hoc
-export const registeredUserListApi = (makh: string) => {
+export const registeredUserListApi = (makh: MaKh) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.post(
-        "/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc",
-        makh
-      );
+      const result = await http.post("/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc", makh);
       const action = registeredUserListAction(result.data);
       dispatch(action);
     } catch (error) {
@@ -150,13 +149,10 @@ export const registeredUserListApi = (makh: string) => {
   };
 };
 //lay danh sach ng dung cho xet duyet
-export const waitingUserListApi = (makh: string) => {
+export const waitingUserListApi = (makh: MaKh) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.post(
-        "/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet",
-        makh
-      );
+      const result = await http.post("/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet", makh);
       const action = waitingUserListAction(result.data);
       dispatch(action);
     } catch (error) {

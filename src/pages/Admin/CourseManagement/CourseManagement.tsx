@@ -3,14 +3,23 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../../redux/configStore';
-import { CourseModel, getAllCourseApi } from '../../../redux/reducers/courseReducer';
+import { CourseModel, getAllCourseApi, MaKh } from '../../../redux/reducers/courseReducer';
+import { registeredUserListApi, waitingUserListApi } from '../../../redux/reducers/userReducer';
 import ConfirmList from './ConfirmList'
 import JoinList from './JoinList';
 type Props = {}
 export default function CourseManagement({}: Props) {
   const {arrCourse} = useSelector((state:RootState)=>state.courseReducer)
-  const [maKh,setMaKh] = useState("")
+  // const [maKh,setMaKh] = useState("")
   const dispatch:AppDispatch = useDispatch()
+  const registerList = (maKh:MaKh):void =>{
+    const action = registeredUserListApi(maKh)
+    dispatch(action)
+  }
+  const waitingList = (maKh:MaKh):void =>{
+    const action = waitingUserListApi(maKh)
+    dispatch(action)
+  }
   useEffect(() => {
     dispatch(getAllCourseApi());
   }, [])
@@ -30,8 +39,12 @@ export default function CourseManagement({}: Props) {
           data-bs-toggle="modal"
           data-bs-target="#modalGhiDanh"
           className="btn btn-success m-2"
-          onClick={()=>{
-            setMaKh(course.maKhoaHoc)
+          onClick={():void=>{
+            const maKhoaHoc:MaKh = {
+              maKhoaHoc : course?.maKhoaHoc
+            }
+            registerList(maKhoaHoc)
+            waitingList(maKhoaHoc)
           }}
         >
           Ghi danh
@@ -85,17 +98,17 @@ export default function CourseManagement({}: Props) {
                 </div>
               </div>
               <div className="content-2">
-                <ConfirmList maKh = {maKh}/>
+                <ConfirmList/>
               </div>
               <div className="content-3">
-                <JoinList maKh = {maKh}/>
+                <JoinList/>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="course-title">
-        <NavLink to={'/admin/addcourse'} state={{course:{
+        <NavLink className='btn btn-secondary' to={'/admin/addcourse'} state={{course:{
           maKhoaHoc: '',
           tenKhoaHoc: '',
           moTa: '',
@@ -110,17 +123,7 @@ export default function CourseManagement({}: Props) {
           },
         }}}>Thêm khóa học</NavLink>
       </div>
-      <form className="mt-5">
-        <div className="form-group">
-          <input
-            className="form-control mb-2"
-            type="search"
-            placeholder="Nhập vào tại khoản hoặc tên người dùng"
-          />
-          <button className="btn btn-dark btn-sm">Tìm kiếm</button>
-        </div>
-      </form>
-      <div className="d-flex mt-5 course-table">
+      <div className="d-flex mt-4 course-table">
         <div className="table-responsive border border-dark">
           <table className="table table-striped align-middle">
             <thead>

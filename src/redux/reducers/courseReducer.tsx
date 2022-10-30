@@ -15,7 +15,9 @@ export interface CourseModel {
   nguoiTao: NguoiTao;
   danhMucKhoaHoc: DanhMucKhoaHoc;
 }
-
+export interface MaKh {
+  maKhoaHoc: string;
+}
 export interface DanhMucKhoaHoc {
   maDanhMuc: string;
   tenDanhMuc: string;
