@@ -2,21 +2,18 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../../redux/configStore"
 import { registeredUserListApi, UserModel } from "../../../redux/reducers/userReducer"
-
+import { MaKh } from "../../../redux/reducers/courseReducer"
 type Props = {
-  maKh:string,
+  maKh?:string,
 }
 export default function ConfirmList({maKh}: Props) {
   const {registeredUsers} = useSelector((state:RootState)=>state.userReducer)
-  const dispatch:AppDispatch = useDispatch()
-  const registerList = (maKh:string) =>{
-    const action = registeredUserListApi(maKh)
-    dispatch(action)
-  }
-  useEffect(()=>{
-    registerList(maKh)
-  },[maKh])
   const renderRegister = () => {
+    if(registeredUsers?.length === 0){
+      return <tr>
+      <td colSpan={4} className='fw-bold'>Không có học viên đăng ký khóa học</td>
+    </tr>
+    }
     return registeredUsers.map((user:UserModel,index:number)=>{
       return <tr className="text-center" key={index}>
       <td>{index+1}</td>

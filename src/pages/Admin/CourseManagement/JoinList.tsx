@@ -1,23 +1,21 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../../redux/configStore"
+import { MaKh } from "../../../redux/reducers/courseReducer"
 import { UserModel, waitingUserListApi } from "../../../redux/reducers/userReducer"
 
 type Props = {
-  maKh:string,
+  maKh?:string,
 }
 export default function JoinList({maKh}: Props) {
   const {waitingUsers} = useSelector((state:RootState)=>state.userReducer)
-  const dispatch:AppDispatch = useDispatch()
-  const waitingList = (maKh:string) =>{
-    const action = waitingUserListApi(maKh)
-    dispatch(action)
-  }
   
-  useEffect(()=>{
-    waitingList(maKh)
-  },[maKh])
   const renderWaiting = () =>{
+    if(waitingUsers?.length === 0){
+      return <tr>
+        <td colSpan={4} className='fw-bold'>Chưa có học viên được xét duyệt</td>
+      </tr>
+    }
     return waitingUsers.map((user:UserModel,index:number)=>{
       return <tr className="text-center" key={index}>
       <td>{index+1}</td>
