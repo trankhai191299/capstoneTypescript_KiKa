@@ -27,6 +27,15 @@ export interface UserModel {
   confirmMatKhau?: string;
   maLoaiNguoiDung?: string;
 }
+export interface addUser {
+  taiKhoan: string;
+  matKhau: string;
+  hoTen: string;
+  soDT: string;
+  maLoaiNguoiDung?: string;
+  maNhom?: string;
+  email: string;
+}
 const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
   registeredUsers: [],
@@ -103,8 +112,6 @@ export const registerApi = (values: UserModel) => {
   return async (dispatch: AppDispatch) => {
     try {
       const result = await http.post("/QuanLyNguoiDung/DangKy", values);
-
-      // console.log(result.data)
       alert("Đăng ký thành công!");
       history.push("/login");
       const action = getProfileApi();
@@ -143,6 +150,8 @@ export const registeredUserListApi = (makh: string) => {
         makh
       );
       const action = registeredUserListAction(result.data);
+      console.log(result.data);
+
       dispatch(action);
     } catch (error) {
       console.log(error);
@@ -158,6 +167,8 @@ export const waitingUserListApi = (makh: string) => {
         makh
       );
       const action = waitingUserListAction(result.data);
+      console.log(result.data);
+
       dispatch(action);
     } catch (error) {
       console.log(error);
