@@ -5,7 +5,8 @@ import { AppDispatch } from "../../../redux/configStore"
 import {useFormik,FormikProps} from 'formik'
 import * as Yup from 'yup'
 import { capNhatKhoaHocApi, CourseModel2, themKhoaHocApi } from "../../../redux/reducers/courseReducer"
-import { values } from "lodash"
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+// import ckeditor from '@ckeditor/ckeditor5-react'
 type Props = {}
 
 interface FormValues {
