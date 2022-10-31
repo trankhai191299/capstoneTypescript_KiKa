@@ -1,10 +1,11 @@
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useLocation } from "react-router-dom"
-import { AppDispatch } from "../../../redux/configStore"
+import { AppDispatch, RootState } from "../../../redux/configStore"
 import {useFormik,FormikProps} from 'formik'
 import * as Yup from 'yup'
-import { capNhatKhoaHocApi, CourseModel2, themKhoaHocApi } from "../../../redux/reducers/courseReducer"
+import { capNhatKhoaHocApi, CourseModel2, DanhMucKhoaHoc, getCourseCategory, themKhoaHocApi } from "../../../redux/reducers/courseReducer"
+import { getAllUserApi, UserModel } from "../../../redux/reducers/userReducer"
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 // import ckeditor from '@ckeditor/ckeditor5-react'
 type Props = {}
@@ -21,12 +22,41 @@ interface FormValues {
   ngayTao: string;
   maDanhMucKhoaHoc: string;
   taiKhoanNguoiTao: string;
+  submitAction?:string|undefined;
 }
+
 export default function AddCourse({}: Props) {
   const dispatch:AppDispatch = useDispatch()
   const location = useLocation()
+  const {allUsers} = useSelector((state:RootState)=>state.userReducer)
+  const {courseCategory} = useSelector((state:RootState)=>state.courseReducer)
   const {course} = location.state
-  
+  let submitAction: string|undefined = undefined
+  const getAllUser = () =>{
+    dispatch(getAllUserApi())
+  }
+  const getCategory = () =>{
+    dispatch(getCourseCategory())
+  }
+  useEffect(()=>{
+    getAllUser()
+    getCategory()
+  },[])
+  const getOnlyGvUser = (arr:UserModel[]) =>{
+    let newArr = arr.filter((item)=>item.maLoaiNguoiDung?.includes('GV'))
+    return newArr
+  }
+  const renderOptTK = () =>{
+    let arrGv = getOnlyGvUser(allUsers)
+    return arrGv?.map((user:UserModel,index:number)=>{
+      return <option value={user?.taiKhoan} key={index}>{user?.hoTen}</option>
+    })
+  }
+  const renderOptCt = () =>{
+    return courseCategory?.map((crs:DanhMucKhoaHoc,index:number)=>{
+      return <option value={crs.maDanhMuc} key={index}>{crs.tenDanhMuc}</option>
+    })
+  }
   const frm:FormikProps<FormValues> = useFormik<FormValues>({
     initialValues:{
       maKhoaHoc: course?.maKhoaHoc,
@@ -38,9 +68,18 @@ export default function AddCourse({}: Props) {
       ngayTao: course?.ngayTao,
       maDanhMucKhoaHoc: course?.maDanhMucKhoaHoc,
       taiKhoanNguoiTao: course?.taiKhoanNguoiTao,
+      submitAction : undefined,
     },
     onSubmit:(values:CourseModel2):void=>{
-      console.log(values);
+      if(submitAction === 'addCourse'){
+        // dispatch(themKhoaHocApi(values))
+        console.log('them khoa ne');
+        
+      }else if(submitAction === 'uptCourse'){
+        // dispatch(capNhatKhoaHocApi(values))
+        console.log('cap nhat ne');
+        
+      }
     },
     validationSchema:Yup.object().shape({
       maKhoaHoc: Yup.string().required('Mã khóa học không được trống'),
@@ -58,7 +97,7 @@ export default function AddCourse({}: Props) {
     <div className="add-course container">
       <h2 className="mt-3">Thêm Sửa Khóa Học</h2>
       <div className="form-part">
-        <form onSubmit={frm.handleSubmit}>
+        <form>
           <div className="row">
             <div className="col-6">
               <div>
@@ -76,12 +115,12 @@ export default function AddCourse({}: Props) {
                   <p>Danh mục khóa học</p>
                   <select className="form-select" name="maDanhMucKhoaHoc" onChange={frm.handleChange} onBlur={frm.handleBlur}>
                     <option defaultChecked> --Chọn danh mục khóa học--</option>
-                    <option value="FrontEnd">Lập trình Frontend</option>
-                    <option value="BackEnd">Lập trình Backend</option>
+                    {renderOptCt()}
+                    {/* <option value="BackEnd">Lập trình Backend</option>
                     <option value="FullStack">Lập trình Full Stack</option>
                     <option value="TuDuy">Tư duy Lập trình</option>
                     <option value="Design">Thiết kế Web</option>
-                    <option value="DiDong">Lập trình Di động</option>
+                    <option value="DiDong">Lập trình Di động</option> */}
                   </select>
                   {frm.errors.maDanhMucKhoaHoc?<span className="text-danger">{frm.errors.maDanhMucKhoaHoc}</span>:''}
                 </div>
@@ -108,13 +147,13 @@ export default function AddCourse({}: Props) {
                   <p>Người tạo</p>
                   <select className="form-select" name="taiKhoanNguoiTao" onChange={frm.handleChange} onBlur={frm.handleBlur}>
                     <option defaultChecked> --Chọn người tạo--</option>
-                    <option value="huyadmin">Huy Nguyễn</option>
-                    <option value="dpnguyen">Lê Quang Anh</option>
+                    {renderOptTK()}
+                    {/* <option value="dpnguyen">Lê Quang Anh</option>
                     <option value="khanhpham">Phạm Việt Khánh</option>
                     <option value="hunggv1">Hùng GV</option>
                     <option value="123">Phong</option>
                     <option value="nguyenvana">Nguyễn Văn A</option>
-                    <option value="LongDangDn05">Đặng Tiến Long</option>
+                    <option value="LongDangDn05">Đặng Tiến Long</option> */}
                   </select>
                   {frm.errors.taiKhoanNguoiTao?<span className="text-danger">{frm.errors.taiKhoanNguoiTao}</span>:''}
                 </div>
@@ -135,8 +174,14 @@ export default function AddCourse({}: Props) {
               <NavLink to={'/admin/coursemanagement'}>Trở lại</NavLink>
             </div>
             <div className="btn-area">
-              <button className="btn btn-warning mx-2">Thêm</button>
-              <button className="btn btn-secondary mx-2">Lưu</button>
+              <button type="button" className="btn btn-warning mx-2" onClick={()=>{
+                submitAction = 'addCourse'
+                frm.handleSubmit()
+              }}>Thêm</button>
+              <button type="button" className="btn btn-secondary mx-2" onClick={()=>{
+                submitAction = 'uptCourse'
+                frm.handleSubmit()
+              }}>Lưu</button>
             </div>
           </div>
         </form>

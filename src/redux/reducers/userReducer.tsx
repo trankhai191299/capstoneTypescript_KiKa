@@ -11,7 +11,7 @@ import {
   USER_LOGIN,
 } from "../../utils/setting";
 import { history } from "../../index";
-import { isBuffer, values } from "lodash";
+// import { isBuffer, values } from "lodash";
 import { MaKh } from "./courseReducer";
 
 export interface LoginModel {
@@ -43,6 +43,7 @@ const initialState: any = {
   registeredUsers: [],
   waitingUsers: [],
   userBeenAdd:[],
+  allUsers:[]
 };
 
 const userReducer = createSlice({
@@ -63,6 +64,9 @@ const userReducer = createSlice({
       newArrUser.push(action.payload)
       state.userBeenAdd = newArrUser
     },
+    getAllUserAction:(state, action: PayloadAction<UserModel[]>)=>{
+      state.allUsers = action.payload
+    }
   },
 });
 
@@ -70,6 +74,7 @@ export const {
   getProfileAction,
   registeredUserListAction,
   waitingUserListAction,
+  getAllUserAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -87,6 +92,19 @@ export const getProfileApi = () => {
     }
   };
 };
+//lay toan bo nguoi dung
+export const getAllUserApi = () =>{
+  return async (dispatch:AppDispatch)=>{
+    try {
+      const result = await http.get('/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01')
+      const action = getAllUserAction(result.data)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+}
 //dang nhap
 export const loginApi = (userLogin: LoginModel) => {
   return async (dispatch: AppDispatch) => {
@@ -158,7 +176,6 @@ export const registeredUserListApi = (makh: MaKh) => {
         makh
       );
       const action = registeredUserListAction(result.data);
-      console.log(result.data);
 
       dispatch(action);
     } catch (error) {
@@ -175,7 +192,6 @@ export const waitingUserListApi = (makh: MaKh) => {
         makh
       );
       const action = waitingUserListAction(result.data);
-      console.log(result.data);
 
       dispatch(action);
     } catch (error) {
