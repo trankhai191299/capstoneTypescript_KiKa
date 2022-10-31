@@ -28,7 +28,7 @@ export interface UserModel {
   confirmMatKhau?: string;
   maLoaiNguoiDung?: string;
 }
-export interface addUser {
+export interface AddUser {
   taiKhoan: string;
   matKhau: string;
   hoTen: string;
@@ -42,6 +42,7 @@ const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
   registeredUsers: [],
   waitingUsers: [],
+  userBeenAdd:[],
 };
 
 const userReducer = createSlice({
@@ -56,6 +57,11 @@ const userReducer = createSlice({
     },
     waitingUserListAction: (state, action: PayloadAction<UserModel[]>) => {
       state.waitingUsers = action.payload;
+    },
+    addUserAction: (state, action: PayloadAction<AddUser[]>) => {
+      let newArrUser = [...state.userBeenAdd]
+      newArrUser.push(action.payload)
+      state.userBeenAdd = newArrUser
     },
   },
 });
@@ -147,7 +153,10 @@ export const updateUserApi = (values: UserModel) => {
 export const registeredUserListApi = (makh: MaKh) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.post("/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc", makh);
+      const result = await http.post(
+        "/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc",
+        makh
+      );
       const action = registeredUserListAction(result.data);
       console.log(result.data);
 
@@ -161,11 +170,28 @@ export const registeredUserListApi = (makh: MaKh) => {
 export const waitingUserListApi = (makh: MaKh) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.post("/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet", makh);
+      const result = await http.post(
+        "/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet",
+        makh
+      );
       const action = waitingUserListAction(result.data);
       console.log(result.data);
 
       dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addUserApi = (values: AddUser) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.post("/QuanLyNguoiDung/ThemNguoiDung", values);
+      console.log(result);
+      const action = getProfileApi();
+      dispatch(action);
+      history.push("/admin/usermanagement");
     } catch (error) {
       console.log(error);
     }
