@@ -100,10 +100,10 @@ export default function CourseManagement({}: Props) {
                 </div>
               </div>
               <div className="content-2">
-                {/* <ConfirmList/> */}
+                <ConfirmList/>
               </div>
               <div className="content-3">
-                {/* <JoinList/> */}
+                <JoinList/>
               </div>
             </div>
           </div>
