@@ -4,35 +4,35 @@ import { useFormik, FormikProps } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/configStore";
 import * as Yup from "yup";
-import { registerApi, UserModel } from "../../../redux/reducers/userReducer";
+import { registerApi, UserModel,addUser } from "../../../redux/reducers/userReducer";
 import ConfirmList from "./ConfirmList";
 import JoinList from "./JoinList";
 
 type Props = {};
-interface FormValues {
+interface addUserValue {
   taiKhoan: string;
   matKhau: string;
   hoTen: string;
   soDT: string;
-  maNhom: string;
+  maLoaiNguoiDung?: string;
+  maNhom?: string;
   email: string;
-  loaiNguoiDung: string;
 }
 
 export default function UserManagement({}: Props) {
   const dispatch: AppDispatch = useDispatch();
-  const frm: FormikProps<FormValues> = useFormik<FormValues>({
+  const frm: FormikProps<addUserValue> = useFormik<addUserValue>({
     initialValues: {
       taiKhoan: "",
       matKhau: "",
       hoTen: "",
       soDT: "",
+      maLoaiNguoiDung: "",
       maNhom: "GP01",
       email: "",
-      loaiNguoiDung: "",
     },
-    onSubmit: (values: UserModel): void => {
-      dispatch(registerApi(values));
+    onSubmit: (values: addUser): void => {
+      console.log(values);
     },
     validationSchema: Yup.object().shape({
       taiKhoan: Yup.string().required("Tài khoản không được để trống!"),
@@ -205,9 +205,8 @@ export default function UserManagement({}: Props) {
                             className="form-check-input"
                             type="radio"
                             name="gender"
-                            id="gender"
+                            id="gender1"
                             value="Hoc Vien"
-                            defaultValue="option1"
                             defaultChecked
                           />
                           <label className="form-check-label" htmlFor="gender1">
@@ -221,9 +220,8 @@ export default function UserManagement({}: Props) {
                             className="form-check-input"
                             type="radio"
                             name="gender"
-                            id="gender"
+                            id="gender2"
                             value="Giao Vu"
-                            defaultValue="option1"
                             defaultChecked
                           />
                           <label className="form-check-label" htmlFor="gender2">
@@ -234,7 +232,7 @@ export default function UserManagement({}: Props) {
                     </fieldset>
                   </div>
                   <div className="d-grid mt-4 mb-4">
-                    <button className="btn btn-dark">Submit</button>
+                    <button className="btn btn-dark" type="submit">Submit</button>
                   </div>
                 </form>
               </div>
