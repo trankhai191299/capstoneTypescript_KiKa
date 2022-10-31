@@ -1,10 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useFormik, FormikProps } from "formik";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/configStore";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/configStore";
 import * as Yup from "yup";
-import { registerApi, UserModel,addUser } from "../../../redux/reducers/userReducer";
+import {
+  registerApi,
+  UserModel,
+  AddUser,
+  addUserApi,
+} from "../../../redux/reducers/userReducer";
 import ConfirmList from "./ConfirmList";
 import JoinList from "./JoinList";
 
@@ -21,6 +26,8 @@ interface addUserValue {
 
 export default function UserManagement({}: Props) {
   const dispatch: AppDispatch = useDispatch();
+  const { userBeenAdd } = useSelector((state: RootState) => state.userReducer);
+
   const frm: FormikProps<addUserValue> = useFormik<addUserValue>({
     initialValues: {
       taiKhoan: "",
@@ -31,7 +38,8 @@ export default function UserManagement({}: Props) {
       maNhom: "GP01",
       email: "",
     },
-    onSubmit: (values: addUser): void => {
+    onSubmit: (values: AddUser): void => {
+      //dispatch(addUserApi(values));
       console.log(values);
     },
     validationSchema: Yup.object().shape({
@@ -91,19 +99,18 @@ export default function UserManagement({}: Props) {
                 <form className="row g-3" onSubmit={frm.handleSubmit}>
                   <div className="col-md-6 form-floating mb-4">
                     <input
-                      type="email"
+                      type="text"
+                      name="taiKhoan"
                       className="form-control"
-                      id="email"
-                      placeholder="name@example.com"
                       onChange={frm.handleChange}
                       onBlur={frm.handleBlur}
                     />
                     <label className="fw-normal fs-6" htmlFor="floatingInput">
-                      Email address
+                      Account
                     </label>
-                    {frm.errors.email ? (
-                      <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
-                        {frm.errors.email}
+                    {frm.errors.taiKhoan ? (
+                      <span className="text-danger fw-bold">
+                        {frm.errors.taiKhoan}
                       </span>
                     ) : (
                       ""
@@ -112,9 +119,8 @@ export default function UserManagement({}: Props) {
                   <div className="col-md-6 form-floating mb-4">
                     <input
                       type="password"
+                      name="matKhau"
                       className="form-control"
-                      id="password"
-                      placeholder="Password"
                       onChange={frm.handleChange}
                       onBlur={frm.handleBlur}
                     />
@@ -125,7 +131,7 @@ export default function UserManagement({}: Props) {
                       Password
                     </label>
                     {frm.errors.matKhau ? (
-                      <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
+                      <span className="text-danger fw-bold">
                         {frm.errors.matKhau}
                       </span>
                     ) : (
@@ -134,10 +140,9 @@ export default function UserManagement({}: Props) {
                   </div>
                   <div className="col-md-6 form-floating mb-4">
                     <input
-                      type="password"
+                      type="text"
+                      name="hoTen"
                       className="form-control"
-                      id="passwordConfirm"
-                      placeholder="Confirm Password"
                       onChange={frm.handleChange}
                       onBlur={frm.handleBlur}
                     />
@@ -145,29 +150,10 @@ export default function UserManagement({}: Props) {
                       className="fw-normal fs-6"
                       htmlFor="floatingConfirmPassword"
                     >
-                      Tai Khoan
-                    </label>
-                    {frm.errors.taiKhoan ? (
-                      <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
-                        {frm.errors.taiKhoan}
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div className="col-md-6 form-floating mb-4">
-                    <input
-                      className="form-control"
-                      id="name"
-                      placeholder="Name"
-                      onChange={frm.handleChange}
-                      onBlur={frm.handleBlur}
-                    />
-                    <label className="fw-normal fs-6" htmlFor="name">
-                      Name
+                      Full name
                     </label>
                     {frm.errors.hoTen ? (
-                      <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
+                      <span className="text-danger fw-bold">
                         {frm.errors.hoTen}
                       </span>
                     ) : (
@@ -176,10 +162,28 @@ export default function UserManagement({}: Props) {
                   </div>
                   <div className="col-md-6 form-floating mb-4">
                     <input
-                      type="tel"
+                      type="email"
+                      name="email"
                       className="form-control"
-                      id="phone"
-                      placeholder="phone"
+                      onChange={frm.handleChange}
+                      onBlur={frm.handleBlur}
+                    />
+                    <label className="fw-normal fs-6" htmlFor="name">
+                      Email
+                    </label>
+                    {frm.errors.email ? (
+                      <span className="text-danger fw-bold">
+                        {frm.errors.email}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="col-md-6 form-floating mb-4">
+                    <input
+                      type="text"
+                      name="soDT"
+                      className="form-control"
                       onChange={frm.handleChange}
                       onBlur={frm.handleBlur}
                     />
@@ -187,7 +191,7 @@ export default function UserManagement({}: Props) {
                       Phone
                     </label>
                     {frm.errors.soDT ? (
-                      <span className="text-danger fs-6 fw-lighter fst-italic ms-1 text-capitalize">
+                      <span className="text-danger fw-bold">
                         {frm.errors.soDT}
                       </span>
                     ) : (
@@ -197,7 +201,7 @@ export default function UserManagement({}: Props) {
                   <div className="col-md-6 form-floating mb-4">
                     <fieldset className="row">
                       <legend className="col-form-label col-sm-2 pt-0 ps-3">
-                        Gender
+                        Type of User
                       </legend>
                       <div className="col-sm-2">
                         <div className="form-check">
@@ -232,7 +236,9 @@ export default function UserManagement({}: Props) {
                     </fieldset>
                   </div>
                   <div className="d-grid mt-4 mb-4">
-                    <button className="btn btn-dark" type="submit">Submit</button>
+                    <button className="btn btn-dark" type="submit">
+                      Submit
+                    </button>
                   </div>
                 </form>
               </div>
