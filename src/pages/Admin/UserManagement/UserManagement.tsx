@@ -9,6 +9,7 @@ import {
   UserModel,
   AddUser,
   addUserApi,
+  getAllUserApi 
 } from "../../../redux/reducers/userReducer";
 import ConfirmList from "./ConfirmList";
 import JoinList from "./JoinList";
@@ -26,7 +27,13 @@ interface addUserValue {
 
 export default function UserManagement({}: Props) {
   const dispatch: AppDispatch = useDispatch();
-  const { userBeenAdd } = useSelector((state: RootState) => state.userReducer);
+  const {allUsers} = useSelector((state: RootState) => state.userReducer);
+  const getAllUser = () => {
+    dispatch(getAllUserApi())
+  }
+  React.useEffect(() => {
+    getAllUser()
+  },[])
 
   const frm: FormikProps<addUserValue> = useFormik<addUserValue>({
     initialValues: {
@@ -34,13 +41,12 @@ export default function UserManagement({}: Props) {
       matKhau: "",
       hoTen: "",
       soDT: "",
-      maLoaiNguoiDung: "",
+      maLoaiNguoiDung: "HV",
       maNhom: "GP01",
       email: "",
     },
     onSubmit: (values: AddUser): void => {
-      //dispatch(addUserApi(values));
-      console.log(values);
+      dispatch(addUserApi(values));
     },
     validationSchema: Yup.object().shape({
       taiKhoan: Yup.string().required("Tài khoản không được để trống!"),
@@ -66,6 +72,32 @@ export default function UserManagement({}: Props) {
         .email("Email sai định dạng. Xin hãy thử lại!"),
     }),
   });
+
+  const renderUserBeenAdd = () => {
+    return allUsers.map((item: addUserValue, index: number) => {
+      return (
+        <tr key={index}>
+          <td>{index + 1}</td>
+          <td>{item.taiKhoan}</td>
+          <td>{item.matKhau}*</td>
+          <td>{item.hoTen}</td>
+          <td>{item.email}</td>
+          <td>{item.soDT}</td>
+          <td>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#modalId"
+              className="btn btn-success m-2"
+            >
+              Ghi danh
+            </button>
+            <button className="btn btn-warning m-2">Cập nhật</button>
+            <button className="btn btn-danger m-2">X</button>
+          </td>
+        </tr>
+      );
+    });
+  };
   return (
     <div className="user-management">
       <div className="userContainer mt-5">
@@ -300,11 +332,11 @@ export default function UserManagement({}: Props) {
               </div>
 
               <div className="content-2">
-                {/* <ConfirmList /> */}
+                <ConfirmList />
               </div>
 
               <div className="content-3">
-                {/* <JoinList /> */}
+                <JoinList />
               </div>
             </div>
           </div>
@@ -346,25 +378,7 @@ export default function UserManagement({}: Props) {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>ITec0123</td>
-                <td>********</td>
-                <td>Le Van A</td>
-                <td>AA@gmail.com</td>
-                <td>0909090909</td>
-                <td>
-                  <button
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalId"
-                    className="btn btn-success m-2"
-                  >
-                    Ghi danh
-                  </button>
-                  <button className="btn btn-warning m-2">Cập nhật</button>
-                  <button className="btn btn-danger m-2">X</button>
-                </td>
-              </tr>
+              {renderUserBeenAdd()}
             </tbody>
           </table>
         </div>

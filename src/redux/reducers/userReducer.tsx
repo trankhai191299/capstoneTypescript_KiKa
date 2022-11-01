@@ -42,8 +42,8 @@ const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
   registeredUsers: [],
   waitingUsers: [],
-  userBeenAdd:[],
-  allUsers:[]
+  userBeenAdd: [],
+  allUsers: [],
 };
 
 const userReducer = createSlice({
@@ -60,13 +60,13 @@ const userReducer = createSlice({
       state.waitingUsers = action.payload;
     },
     addUserAction: (state, action: PayloadAction<AddUser[]>) => {
-      let newArrUser = [...state.userBeenAdd]
-      newArrUser.push(action.payload)
-      state.userBeenAdd = newArrUser
+      let newArrUser = [...state.userBeenAdd];
+      newArrUser.push(action.payload);
+      state.userBeenAdd = newArrUser;
     },
-    getAllUserAction:(state, action: PayloadAction<UserModel[]>)=>{
-      state.allUsers = action.payload
-    }
+    getAllUserAction: (state, action: PayloadAction<UserModel[]>) => {
+      state.allUsers = action.payload;
+    },
   },
 });
 
@@ -75,6 +75,7 @@ export const {
   registeredUserListAction,
   waitingUserListAction,
   getAllUserAction,
+  addUserAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -93,18 +94,19 @@ export const getProfileApi = () => {
   };
 };
 //lay toan bo nguoi dung
-export const getAllUserApi = () =>{
-  return async (dispatch:AppDispatch)=>{
+export const getAllUserApi = () => {
+  return async (dispatch: AppDispatch) => {
     try {
-      const result = await http.get('/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01')
-      const action = getAllUserAction(result.data)
-      dispatch(action)
+      const result = await http.get(
+        "/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01"
+      );
+      const action = getAllUserAction(result.data);
+      dispatch(action);
     } catch (error) {
       console.log(error);
-      
     }
-  }
-}
+  };
+};
 //dang nhap
 export const loginApi = (userLogin: LoginModel) => {
   return async (dispatch: AppDispatch) => {
@@ -204,12 +206,25 @@ export const addUserApi = (values: AddUser) => {
   return async (dispatch: AppDispatch) => {
     try {
       const result = await http.post("/QuanLyNguoiDung/ThemNguoiDung", values);
-      console.log(result);
-      const action = getProfileApi();
+      const action = addUserAction(result.data);
       dispatch(action);
       history.push("/admin/usermanagement");
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const updateUserByAdmiAPI = (values: AddUser) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const result = await http.put(
+        "/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+        values
+      );
+      
+    } catch (err) {
+      console.log(err);
     }
   };
 };

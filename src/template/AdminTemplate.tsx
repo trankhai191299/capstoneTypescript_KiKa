@@ -7,7 +7,7 @@ type Props = {};
 
 export default function AdminTemplate({}: Props) {
   return (
-    <div className="d-flex flex-row">
+    <div className="d-flex flex-row" style={{maxWidth: "100vw"}}>
       <div>
         <AdminHeader />
       </div>

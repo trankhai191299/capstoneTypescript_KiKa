@@ -5,7 +5,7 @@ export default function AdminHeader() {
   return (
       <div
       className="d-inline-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-      style={{ width: 280, height: "100vh" }}
+      style={{ width: 280, height: "100%" }}
     >
       <a
         href="/"
