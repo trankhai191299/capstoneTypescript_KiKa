@@ -1,15 +1,25 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../../redux/configStore"
-import { MaKh } from "../../../redux/reducers/courseReducer"
+import { cancelRegisterCourseApi, DangKyKhoaHoc, MaKh } from "../../../redux/reducers/courseReducer"
 import { UserModel, waitingUserListApi } from "../../../redux/reducers/userReducer"
 
 type Props = {
-  maKh?:string,
+  maKh?:any,
 }
 export default function JoinList({maKh}: Props) {
   const {waitingUsers} = useSelector((state:RootState)=>state.userReducer)
-  
+  const dispatch:AppDispatch = useDispatch()
+  const mKh:MaKh={
+    maKhoaHoc : maKh
+  }
+  const waitingList = (maKh:MaKh):void =>{
+    const action = waitingUserListApi(maKh)
+    dispatch(action)
+  }
+  useEffect(()=>{
+    waitingList(mKh)
+  },[waitingUsers?.length])
   const renderWaiting = () =>{
     if(waitingUsers?.length === 0){
       return <tr>
@@ -22,7 +32,15 @@ export default function JoinList({maKh}: Props) {
       <td>{user.taiKhoan}</td>
       <td>{user.hoTen}</td>
       <td>
-        <button className="btn btn-danger">Hủy</button>
+        <button className="btn btn-danger" onClick={()=>{
+          let value:DangKyKhoaHoc = {
+            taiKhoan : user.taiKhoan,
+            maKhoaHoc : maKh,
+          }
+          if(window.confirm('Bạn có muốn hủy học viên này?')){
+            dispatch(cancelRegisterCourseApi(value))
+          }
+        }}>Hủy</button>
       </td>
     </tr>
     })

@@ -2,12 +2,23 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../../redux/configStore"
 import { registeredUserListApi, UserModel } from "../../../redux/reducers/userReducer"
-import { MaKh } from "../../../redux/reducers/courseReducer"
+import { cancelRegisterCourseApi, DangKyKhoaHoc, ghiDanhApi, MaKh } from "../../../redux/reducers/courseReducer"
 type Props = {
-  maKh?:string,
+  maKh?:any,
 }
 export default function ConfirmList({maKh}: Props) {
   const {registeredUsers} = useSelector((state:RootState)=>state.userReducer)
+  const dispatch:AppDispatch = useDispatch()
+  const mKh:MaKh={
+    maKhoaHoc : maKh
+  }
+  const registerList = (maKh:MaKh):void =>{
+    const action = registeredUserListApi(maKh)
+    dispatch(action)
+  }
+  useEffect(()=>{
+    registerList(mKh)
+  },[registeredUsers?.length])
   const renderRegister = () => {
     if(registeredUsers?.length === 0){
       return <tr>
@@ -20,8 +31,24 @@ export default function ConfirmList({maKh}: Props) {
       <td>{user.taiKhoan}</td>
       <td>{user.hoTen}</td>
       <td>
-        <button className="btn btn-success mx-2">Xác thực</button>
-        <button className="btn btn-danger mx-2">Hủy</button>
+        <button className="btn btn-success mx-2" onClick={()=>{
+          let value1:DangKyKhoaHoc = {
+            maKhoaHoc : maKh,
+            taiKhoan : user.taiKhoan
+          }
+          if(window.confirm('Bạn có muốn ghi danh học viên này?')){
+            dispatch(ghiDanhApi(value1))
+          }
+        }}>Xác thực</button>
+        <button className="btn btn-danger mx-2" onClick={()=>{
+          let value2:DangKyKhoaHoc = {
+            maKhoaHoc : maKh,
+            taiKhoan : user.taiKhoan
+          }
+          if(window.confirm('Bạn có muốn hủy học viên này?')){
+            dispatch(cancelRegisterCourseApi(value2))
+          }
+        }}>Hủy</button>
       </td>
     </tr>
     })

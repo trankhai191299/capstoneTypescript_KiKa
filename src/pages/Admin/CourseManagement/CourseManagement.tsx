@@ -1,4 +1,3 @@
-import { type } from 'os';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -10,7 +9,10 @@ import JoinList from './JoinList';
 type Props = {}
 export default function CourseManagement({}: Props) {
   const {arrCourse} = useSelector((state:RootState)=>state.courseReducer)
-  // const [maKh,setMaKh] = useState("")
+  // const {registeredUsers} = useSelector((state:RootState)=>state.userReducer)
+  // const {waitingUsers} = useSelector((state:RootState)=>state.userReducer)
+  const [maKh,setMaKh] = useState("")
+  const [tenKh,setTenKh] = useState('')
   const dispatch:AppDispatch = useDispatch()
   const registerList = (maKh:MaKh):void =>{
     const action = registeredUserListApi(maKh)
@@ -29,19 +31,21 @@ export default function CourseManagement({}: Props) {
     return arrCourse?.map((course:CourseModel,index:number)=>{
       return <tr key={index}>
       <td className='stt'>{index+1}</td>
-      <td className='mkh'>{course.maKhoaHoc}</td>
-      <td className='tkh'>{course.tenKhoaHoc}</td>
+      <td className='mkh'>{course?.maKhoaHoc}</td>
+      <td className='tkh'>{course?.tenKhoaHoc}</td>
       <td className='ha'>
-        <img src={course.hinhAnh} alt={course.tenKhoaHoc} width={50} height={50}/>
+        <img src={course.hinhAnh} alt={course?.tenKhoaHoc} width={50} height={50}/>
       </td>
-      <td className='lx'>{course.luotXem}</td>
-      <td className='ngtao'>{course.nguoiTao.hoTen}</td>
+      <td className='lx'>{course?.luotXem}</td>
+      <td className='ngtao'>{course?.nguoiTao.hoTen}</td>
       <td className='thtc'>
         <button
           data-bs-toggle="modal"
           data-bs-target="#modalGhiDanh"
           className="btn btn-success m-2"
           onClick={():void=>{
+            setMaKh(course?.maKhoaHoc)
+            setTenKh(course?.tenKhoaHoc)
             const maKhoaHoc:MaKh = {
               maKhoaHoc : course?.maKhoaHoc
             }
@@ -73,6 +77,9 @@ export default function CourseManagement({}: Props) {
         >
           <div className="modal-content">
             <div className="modal-header">
+              <div className="modal-title">
+                <h3>{tenKh}</h3>
+              </div>
               <button
                 type="button"
                 className="btn-close"
@@ -100,10 +107,10 @@ export default function CourseManagement({}: Props) {
                 </div>
               </div>
               <div className="content-2">
-                <ConfirmList/>
+                <ConfirmList maKh={maKh}/>
               </div>
               <div className="content-3">
-                <JoinList/>
+                <JoinList maKh={maKh}/>
               </div>
             </div>
           </div>

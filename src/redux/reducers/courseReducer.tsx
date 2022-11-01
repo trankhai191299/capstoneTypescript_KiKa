@@ -185,7 +185,11 @@ export const ghiDanhApi = (values:DangKyKhoaHoc) =>{
   return async (dispatch:AppDispatch)=>{
     try {
       let result = await http.post('/QuanLyKhoaHoc/GhiDanhKhoaHoc',values)
-      console.log(result);
+      // console.log(result);
+      
+      if(result){
+        dispatch(getAllCourseApi())
+      }
     } catch (error) {
       console.log(error);
       
@@ -200,6 +204,7 @@ export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
       
       const action = getProfileApi()
       dispatch(action)
+      dispatch(getAllCourseApi())
     } catch (error:any) {
       console.log(error);
     }
