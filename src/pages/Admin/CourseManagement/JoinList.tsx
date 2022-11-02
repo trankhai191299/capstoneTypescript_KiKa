@@ -17,9 +17,6 @@ export default function JoinList({maKh}: Props) {
     const action = waitingUserListApi(maKh)
     dispatch(action)
   }
-  useEffect(()=>{
-    waitingList(mKh)
-  },[waitingUsers?.length])
   const renderWaiting = () =>{
     if(waitingUsers?.length === 0){
       return <tr>
@@ -32,13 +29,14 @@ export default function JoinList({maKh}: Props) {
       <td>{user.taiKhoan}</td>
       <td>{user.hoTen}</td>
       <td>
-        <button className="btn btn-danger" onClick={()=>{
+        <button className="btn btn-danger" onClick={async()=>{
           let value:DangKyKhoaHoc = {
             taiKhoan : user.taiKhoan,
             maKhoaHoc : maKh,
           }
           if(window.confirm('Bạn có muốn hủy học viên này?')){
-            dispatch(cancelRegisterCourseApi(value))
+            await dispatch(cancelRegisterCourseApi(value))
+            waitingList(mKh)
           }
         }}>Hủy</button>
       </td>

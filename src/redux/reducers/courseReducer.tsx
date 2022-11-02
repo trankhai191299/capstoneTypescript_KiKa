@@ -55,7 +55,7 @@ const initialState: any = {
 };
 
 const courseReducer = createSlice({
-  name: "subjectReducer",
+  name: "courseReducer",
   initialState,
   reducers: {
     getAllCourseAction: (state, action: PayloadAction<CourseModel[]>) => {
@@ -204,7 +204,7 @@ export const cancelRegisterCourseApi = (values:DangKyKhoaHoc)=>{
       
       const action = getProfileApi()
       dispatch(action)
-      dispatch(getAllCourseApi())
+      // dispatch(getAllCourseApi())
     } catch (error:any) {
       console.log(error);
     }

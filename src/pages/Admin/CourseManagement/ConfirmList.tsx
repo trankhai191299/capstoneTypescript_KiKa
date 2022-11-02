@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../../redux/configStore"
-import { registeredUserListApi, UserModel } from "../../../redux/reducers/userReducer"
+import { registeredUserListApi, UserModel, waitingUserListApi } from "../../../redux/reducers/userReducer"
 import { cancelRegisterCourseApi, DangKyKhoaHoc, ghiDanhApi, MaKh } from "../../../redux/reducers/courseReducer"
 type Props = {
   maKh?:any,
@@ -16,9 +16,14 @@ export default function ConfirmList({maKh}: Props) {
     const action = registeredUserListApi(maKh)
     dispatch(action)
   }
-  useEffect(()=>{
+  const waitingList = (maKh:MaKh):void =>{
+    const action = waitingUserListApi(maKh)
+    dispatch(action)
+  }
+  const reloadModal = ():void =>{
     registerList(mKh)
-  },[registeredUsers?.length])
+    waitingList(mKh)
+  }
   const renderRegister = () => {
     if(registeredUsers?.length === 0){
       return <tr>
@@ -31,22 +36,24 @@ export default function ConfirmList({maKh}: Props) {
       <td>{user.taiKhoan}</td>
       <td>{user.hoTen}</td>
       <td>
-        <button className="btn btn-success mx-2" onClick={()=>{
+        <button className="btn btn-success mx-2" onClick={async()=>{
           let value1:DangKyKhoaHoc = {
             maKhoaHoc : maKh,
             taiKhoan : user.taiKhoan
           }
           if(window.confirm('Bạn có muốn ghi danh học viên này?')){
-            dispatch(ghiDanhApi(value1))
+            await dispatch(ghiDanhApi(value1))
+            reloadModal()
           }
         }}>Xác thực</button>
-        <button className="btn btn-danger mx-2" onClick={()=>{
+        <button className="btn btn-danger mx-2" onClick={ async()=>{
           let value2:DangKyKhoaHoc = {
             maKhoaHoc : maKh,
             taiKhoan : user.taiKhoan
           }
           if(window.confirm('Bạn có muốn hủy học viên này?')){
-            dispatch(cancelRegisterCourseApi(value2))
+            await dispatch(cancelRegisterCourseApi(value2))
+            registerList(mKh)
           }
         }}>Hủy</button>
       </td>

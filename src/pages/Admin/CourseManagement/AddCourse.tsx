@@ -97,7 +97,7 @@ export default function AddCourse({}: Props) {
     <div className="add-course container">
       <h2 className="mt-3">Thêm Sửa Khóa Học</h2>
       <div className="form-part">
-        <form>
+        <form onSubmit={frm.handleSubmit}>
           <div className="row">
             <div className="col-6">
               <div>
