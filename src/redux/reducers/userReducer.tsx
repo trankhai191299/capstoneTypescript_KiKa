@@ -42,8 +42,8 @@ const initialState: any = {
   userLogin: getStoreJson(USER_LOGIN),
   registeredUsers: [],
   waitingUsers: [],
-  userBeenAdd: [],
   allUsers: [],
+  userBeenAdd: []
 };
 
 const userReducer = createSlice({
@@ -60,9 +60,8 @@ const userReducer = createSlice({
       state.waitingUsers = action.payload;
     },
     addUserAction: (state, action: PayloadAction<AddUser[]>) => {
-      let newArrUser = [...state.userBeenAdd];
-      newArrUser.push(action.payload);
-      state.userBeenAdd = newArrUser;
+      state.userBeenAdd = [...state.allUsers];
+      state.allUsers = state.userBeenAdd;
     },
     getAllUserAction: (state, action: PayloadAction<UserModel[]>) => {
       state.allUsers = action.payload;

@@ -33,7 +33,7 @@ export default function UserManagement({}: Props) {
   }
   React.useEffect(() => {
     getAllUser()
-  },[])
+  })
 
   const frm: FormikProps<addUserValue> = useFormik<addUserValue>({
     initialValues: {
@@ -73,7 +73,7 @@ export default function UserManagement({}: Props) {
     }),
   });
 
-  const renderUserBeenAdd = () => {
+  const renderUserBeenAdd = React.useCallback(() => {
     return allUsers.map((item: addUserValue, index: number) => {
       return (
         <tr key={index}>
@@ -97,7 +97,7 @@ export default function UserManagement({}: Props) {
         </tr>
       );
     });
-  };
+  },[allUsers]);
   return (
     <div className="user-management">
       <div className="userContainer mt-5">
