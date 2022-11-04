@@ -7,5 +7,5 @@ Lê Trung Kiên
 
 ## Link
 --Git: https://github.com/trankhai191299/capstoneTypescript_KiKa.git \
---Youtube: \
+--Youtube: https://youtu.be/V1L964j_XQc \
 --Deploy: https://elearning-csts.vercel.app/home \
